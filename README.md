@@ -61,12 +61,11 @@ Open the `server` and `client` in separate VSCode workspaces or open the combine
 
 ### Purpose
 
-2-5 sentences describing what the system does
+The purpose of this system is to help the user set and complete tasks. Whilst completing a task you can achieve or unlock goals that you have pre set for each task or group of tasks. Goals can be everything, from developing a workout habit to sticking to a healthier sleep schedule. Once tasks and goals are set by the user, the system also suggests and adapts the schedule according to the user priorities (e.g., allocate enough time to relax).
 
 ### Pages
 
-* Home: 1-3 sentences describing what the page displays and what a user can do
-* Shopping cart: ...
+* Home: the page displays the schedule and tasks, as well as buttons (e.g., add task)
 
 ### Entity-Relationship (ER) Diagram
 
