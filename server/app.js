@@ -5,8 +5,10 @@ var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
 
+var usersController = require('./controllers/users');
+
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
+var mongoURI = process.env.MONGODB_URI  || 'mongodb://localhost:27017/SEMbookDB';
 var port = process.env.PORT || 3000;
 
 // Connect to MongoDB
@@ -35,10 +37,13 @@ app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT341 backend ExpressJS project!'});
 });
 
+app.use*(usersController);
+
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
     res.status(404).json({ 'message': 'Not Found' });
 });
+
 
 // Configuration for serving frontend in production mode
 // Support Vuejs HTML 5 history mode
