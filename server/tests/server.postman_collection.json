@@ -1,104 +1,235 @@
 {
 	"info": {
 		"_postman_id": "90cf29d3-5d20-4128-ba4c-4346704bfed8",
-		"name": "server Copy 3",
+		"name": "server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "GET /api",
-			"event": [
+			"name": "User",
+			"item": [
 				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{host}}/api",
-					"host": [
-						"{{host}}"
+					"name": "POST /api/users",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"var userId = jsonData._id;\r",
+									"pm.environment.set(\"user_id\", userId);\r",
+									"var getUserId = pm.variables.get(\"user_id\");\r",
+									"\r",
+									"var userName = jsonData.name;\r",
+									"pm.environment.set(\"user_name\", userName);\r",
+									"var getUserName = pm.variables.get(\"user_name\");\r",
+									"\r",
+									"var userPassword = jsonData.password;\r",
+									"pm.environment.set(\"user_password\", userPassword);\r",
+									"var getUserName = pm.variables.get(\"user_password\");\r",
+									"\r",
+									"pm.test(\"Staus code is 201\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
 					],
-					"path": [
-						"api"
-					]
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"user_id\": \"1\",\r\n        \"name\": \"insertName\",\r\n        \"password\": \"password\"\r\n    }"
+						},
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /api",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH /api/users",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /api/users",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/users/:?id=6143094c42b7f63d742ec371",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6143094c42b7f63d742ec371"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /api/users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "POST /api/users Copy",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"var jsonData = pm.response.json();\r",
-							"var userId = jsonData._id\r",
-							"pm.environment.set(\"user_id\", userId);\r",
-							"\r",
-							"var getUserId = pm.variables.get(\"user_id\");\r",
-							"\r",
-							"pm.test(\"Staus code is 201\", function(){\r",
-							"    pm.response.to.have.status(201);\r",
-							"})"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n        \"user_id\": 0,\r\n        \"name\": \"insertName\",\r\n        \"password\": \"password\"\r\n    }"
-				},
-				"url": {
-					"raw": "{{host}}/api/users",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"users"
-					]
-				}
-			},
-			"response": []
+			"name": "Club",
+			"item": []
+		},
+		{
+			"name": "Event",
+			"item": []
+		},
+		{
+			"name": "Schedule",
+			"item": []
 		}
 	],
 	"event": [
@@ -124,8 +255,7 @@
 	"variable": [
 		{
 			"key": "host",
-			"value": "http://localhost:3000",
-			"type": "string"
+			"value": "http://localhost:3001"
 		}
 	]
 }
