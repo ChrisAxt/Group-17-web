@@ -1,27 +1,25 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-
-var userSchema = new Schema({
-    _id: {type: String},
-    name: {type: String},
-    password: {type: String}
-});
-
-var User = mongoose.model('users', userSchema);
+var User = require('../models/user');
 
 router.post('/api/users', function(req, res, next){
-    var user = new User({
-        "_id": 0,
-        "name": "insertName",
-        "password": "password"
-    })
+    var user = new User(req.body);
     user.save(function(err, user){
-        if(err){return console.error(err);}
+        if(err){return next(err);}
         res.status(201).json(user);
     })
-    res.status(201).json(user);
 });
+
+/* router.delete('/api/users/:user_Id', function(req, res, next){
+    
+    
+    collection("users").deleteOne(user_id, function(err, obj) {
+      if (err) throw err;
+      console.log("1 user deleted");
+      db.close();
+    }); 
+    
+}) */
+
 
 module.exports = router;
