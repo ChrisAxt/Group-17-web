@@ -9,7 +9,7 @@ var usersController = require('./controllers/users');
 
 // Variables
 var mongoURI = process.env.MONGODB_URI  || 'mongodb://localhost:27017/SEMbookDB';
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3001;
 
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err) {
