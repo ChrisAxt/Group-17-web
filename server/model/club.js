@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var clubSchema = new Schema({
-    _id: {type: String},
+    club_id: {type: String},
     name: {type: String},
     tag: {type: String},
     description: {type: String}
