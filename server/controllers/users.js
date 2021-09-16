@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 
-router.post('/', function (req, res, next) {
+router.post('/api/users', function (req, res, next) {
     var user = new User(req.body);
     user.save(function (err) {
         if (err) { return next(err); }
