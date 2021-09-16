@@ -11,6 +11,21 @@ router.post('/api/users', function (req, res, next) {
     });
 });
 
+router.get('/api/users/:id', function (req, res, next){
+    
+    var id = req.params.id;
+     
+    User.find({_id: id}, function(err, user){
+        if (err) { return next(err); }
+        if (user == null) {
+            return res.status(404).json({"message": "User not found"});
+        }
+        
+        var returndUser = user;
+        res.json(returndUser);
+    })
+})
+
 router.delete('/api/users/:id', function(req, res, next) {
     
     var id = req.params.id;
