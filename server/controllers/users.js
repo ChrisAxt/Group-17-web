@@ -10,7 +10,7 @@ router.post('/api/users', function(req, res, next){
     })
 });
 
-/* router.delete('/api/users/:user_Id', function(req, res, next){
+ router.delete('/api/users/:user_Id', function(req, res, next){
     
     
     collection("users").deleteOne(user_id, function(err, obj) {
@@ -19,7 +19,7 @@ router.post('/api/users', function(req, res, next){
       db.close();
     }); 
     
-}) */
+}) 
 
 
 module.exports = router;
