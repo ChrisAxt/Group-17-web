@@ -9,4 +9,4 @@ var clubSchema = new Schema({
 
 });
 
-module.exports(mongoose.model('club', clubSchema));
+module.exports = mongoose.model('club', clubSchema);

@@ -10,4 +10,4 @@ var scheduleSchema = new Schema({
  
 });
 
-module.exports(mongoose.model('schedule', scheduleSchema));
+module.exports = mongoose.model('schedule', scheduleSchema);
