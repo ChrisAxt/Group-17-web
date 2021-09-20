@@ -91,4 +91,35 @@ router.patch('/api/events/:id', function(req, res, next) {
     });
 });
 
+router.post('api/users/:id/events', function(req, res, next) {
+    
+    var id = req.params.id;
+    User.findById(id, function(err, user) {
+        if (err) { return next(err); }
+        if (user == null) {
+            return res.status(404).json({"message": "User not found"});
+        }
+        res.json(user);
+    });
+    var event = new Event(req.body);
+    //Gimmy TODO: event.creatorId
+    //event populate creatorId with user
+    event.save(function (err) {
+        if (err) { return next(err); }
+        res.status(201).json(event);
+    });
+});
+
+router.get('/api/users/:id/events', function(req, res, next){
+    
+});
+
+router.get('/api/users/:id/events/:id', function(req, res, next){
+
+});
+
+router.delete('/api/users/:id/events/:id', function(req, res, next){
+
+});
+
 module.exports = router;

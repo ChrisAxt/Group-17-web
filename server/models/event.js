@@ -9,6 +9,7 @@ var eventSchema = new Schema({
     scheduleId: {type: Array},
     description: {type: String},
     clubId: {type: Array},
+    creatorId: {type: Schema.Types.ObjectId, ref: 'User'},
     attendeeIds: {type: Array}
 });
 
