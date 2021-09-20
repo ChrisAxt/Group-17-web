@@ -8,6 +8,7 @@ var eventSchema = new Schema({
     name: {type: String},
     scheduleId: {type: String},
     description: {type: String},
+    clubId: {type: String},
     attendeeIds: {type: String}
 });
 

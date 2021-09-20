@@ -6,8 +6,8 @@ var clubSchema = new Schema({
     name: {type: String},
     tag: {type: String},
     description: {type: String},
-    userIds: {type: Array},
-    eventIds: {type: Array}
+    ownerId: {type: String},
+    userIds: {type: Array}
 });
 
 module.exports = mongoose.model('club', clubSchema);

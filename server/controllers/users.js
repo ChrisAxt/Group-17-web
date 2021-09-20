@@ -54,7 +54,6 @@ router.put('/api/users/:id', function(req, res, next) {
         user.user_id = req.body.user_id;
         user.name = req.body.name;
         user.password = req.body.password;
-        user.createdClubIds = req.body.createdClubIds;
         user.clubIds = req.body.clubIds;
         user.eventIds = req.body.eventIds;
         user.save();
