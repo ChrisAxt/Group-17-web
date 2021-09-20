@@ -16,6 +16,10 @@ router.get('/api/events', function (req, res, next){
 
     Event.find(function(err, events){
         if (err) { return next(err); }
+        if (events == null) {
+            return res.status(404).json({"message": "Event not found"});
+        }
+        
         return res.status(200).json({"events": events});
     });
 });
@@ -39,8 +43,8 @@ router.get('/api/events/:id', function (req, res, next){
             return res.status(404).json({"message": "Event not found"});
         }
         
-        var returnedUser = event;
-        return res.status(200).json(returnedUser);
+        var returnedEvent = event;
+        return res.status(200).json(returnedEvent);
     })
 })
 
