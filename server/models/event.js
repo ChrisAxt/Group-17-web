@@ -6,10 +6,10 @@ var Schema = mongoose.Schema;
 var eventSchema = new Schema({
     event_id: {type: String},
     name: {type: String},
-    scheduleId: {type: String},
+    scheduleId: {type: Array},
     description: {type: String},
-    clubId: {type: String},
-    attendeeIds: {type: String}
+    clubId: {type: Array},
+    attendeeIds: {type: Array}
 });
 
 module.exports = mongoose.model('event', eventSchema);
