@@ -1,5 +1,6 @@
 var express = require('express');
 const { Mongoose } = require('mongoose');
+const { db } = require('../models/user');
 var router = express.Router();
 var User = require('../models/user');
 
@@ -32,7 +33,7 @@ router.delete('/api/users', function (req, res, next){
 router.get('/api/users/:id', function (req, res, next){
     
     var id = req.params.id;
-     
+    //TODO: Change this to match sort function (_id)
     User.find({_id: id}, function(err, user){
         if (err) { return next(err); }
         if (user == null) {
@@ -45,25 +46,19 @@ router.get('/api/users/:id', function (req, res, next){
 })
 
 //Sorting function
-router.get('/api/users?sort=name&direction=desc', function (req, res, next){
-
-
-    var users = new Array();
-
-    users = User.find(function(err, users){
-        if (err) { return next(err); }
-
-        users.sort(function(a, b){
-            let x = a.name.toLowerCase();
-            let y = b.name.toLowerCase();
-            if (x > y) {return -1;}
-            if (x < y) {return 1;}
-            return 0;
-          });
-
-        return res.status(200).json({"users": users});
-    });
+router.get('/api/users/sort/:someAttribute/:order', function (req, res, next){
+   
+    var attributeName = req.params.someAttribute.substring(1);
+    var theOrder = parseInt(req.params.order.substring(1));
+    var mySort = {}; 
     
+    mySort[attributeName] = theOrder;
+
+        db.collection("users").find().sort(mySort).toArray(function(err, users) {
+            if (err) {throw err};
+
+          return res.status(200).json({"users": users});
+    });
 });
 
 //put and patch
