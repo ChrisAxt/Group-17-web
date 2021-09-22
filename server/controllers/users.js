@@ -14,10 +14,10 @@ router.post('/api/users', function (req, res, next) {
 
 router.get('/api/users', function (req, res, next){
 
-    User.find(function(err, users){
+     User.find(function(err, users){
         if (err) { return next(err); }
         return res.status(200).json({"users": users});
-    });
+    }); 
 });
 
 router.delete('/api/users', function (req, res, next){
@@ -43,6 +43,28 @@ router.get('/api/users/:id', function (req, res, next){
         return res.status(200).json(returnedUser);
     })
 })
+
+//Sorting function
+router.get('/api/users?sort=name&direction=desc', function (req, res, next){
+
+
+    var users = new Array();
+
+    users = User.find(function(err, users){
+        if (err) { return next(err); }
+
+        users.sort(function(a, b){
+            let x = a.name.toLowerCase();
+            let y = b.name.toLowerCase();
+            if (x > y) {return -1;}
+            if (x < y) {return 1;}
+            return 0;
+          });
+
+        return res.status(200).json({"users": users});
+    });
+    
+});
 
 //put and patch
 
