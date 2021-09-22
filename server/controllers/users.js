@@ -44,7 +44,36 @@ router.get('/api/users/:id', function (req, res, next){
     })
 })
 
-//put and patch
+router.put('/api/users/:id', function(req, res, next) {
+    var id = req.params.id;
+    User.findById(id, function(err, user) {
+        if (err) { return next(err); }
+        if (user == null) {
+            return res.status(404).json({"message": "User not found"});
+        }
+        user.user_id = req.body.user_id;
+        user.name = req.body.name;
+        user.password = req.body.password;
+        user.clubIds = req.body.clubIds;
+        user.eventIds = req.body.eventIds;
+        user.save();
+        res.json(user);
+    });
+});
+
+router.patch('/api/users/:id', function(req, res, next) {
+    var id = req.params.id;
+    User.findById(id, function(err, user) {
+        if (err) { return next(err); }
+        if (user == null) {
+            return res.status(404).json({"message": "User not found"});
+        }
+        user.name = (req.body.name || user.name);
+        user.password = (req.body.password || user.password);
+        user.save();
+        res.json(user);
+    });
+});
 
 router.delete('/api/users/:id', function(req, res, next) {
     
