@@ -3,7 +3,7 @@ const { Mongoose } = require('mongoose');
 var router = express.Router();
 var Schedule = require('../models/schedule');
 
-router.post('/api/schedule', function (req, res, next) {
+router.post('/api/schedules', function (req, res, next) {
     
     var schedule = new Schedule(req.body);
     schedule.save(function (err) {
@@ -12,7 +12,7 @@ router.post('/api/schedule', function (req, res, next) {
     });
 });
 
-router.get('/api/schedule', function (req, res, next){
+router.get('/api/schedules', function (req, res, next){
 
     Schedule.find(function(err, schedules){
         if (err) { return next(err); }
@@ -20,7 +20,7 @@ router.get('/api/schedule', function (req, res, next){
     });
 });
 
-router.delete('/api/schedule', function (req, res, next){
+router.delete('/api/schedules', function (req, res, next){
 
     Schedule.deleteMany(function(err, schedules){
         if (err) { return next(err); }
