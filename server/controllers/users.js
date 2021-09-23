@@ -33,7 +33,7 @@ router.delete('/api/users', function (req, res, next){
 router.get('/api/users/:id', function (req, res, next){
     
     var id = req.params.id;
-    //TODO: Change this to match sort function (_id)
+    //TODO: Change this to match sort function ()
     User.find({_id: id}, function(err, user){
         if (err) { return next(err); }
         if (user == null) {
@@ -44,9 +44,26 @@ router.get('/api/users/:id', function (req, res, next){
         return res.status(200).json(returnedUser);
     })
 })
+//Filter function
+router.get('/api/users/filter/:filterBy/:filterValue', function (req, res, next){
+
+    var filter = req.params.filterBy.substring(1);
+    var filterValue = req.params.filterValue.substring(1);
+    var myFilter = {};
+    
+    myFilter[filter] = filterValue
+
+    User.find(myFilter, function(err, user){
+        if (err) { return next(err); }
+        if (user == null || user.length === 0) {
+            return res.status(404).json({"message": "User not found"});
+        }
+        return res.status(200).json(user);
+    })
+});
 
 //Sorting function
-router.get('/api/users/sort/:someAttribute/:order', function (req, res, next){
+router.get('/api/users/sort/:someAttribute/:order/', function (req, res, next){
    
     var attributeName = req.params.someAttribute.substring(1);
     var theOrder = parseInt(req.params.order.substring(1));
