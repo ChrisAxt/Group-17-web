@@ -48,8 +48,6 @@ router.get('/api/events/:id', function (req, res, next){
     })
 })
 
-//put and patch
-
 router.delete('/api/events/:id', function(req, res, next) {
     
     var id = req.params.id;
@@ -93,54 +91,6 @@ router.patch('/api/events/:id', function(req, res, next) {
         event.save();
         res.json(event);
     });
-});
-
-router.post('api/users/:id/events', function(req, res, next) {
-    var event = new Event({
-        event_id: req.body.event_id,
-        name: req.body.name,
-        scheduleId: req.body.scheduleId,
-        description: req.body.description,
-        clubId: req.body.clubId,
-        //use the user object id
-        creatorId: req.params.id,
-        attendeeIds: req.body.attendeeIds
-        });
-    event.save(function (err) {
-        if (err) { return next(err); }
-        res.status(201).json(event);
-    });
-    //populate the creatorId field with user details, then print the name
-    event.populate('creatorId').exec(function (err, event){
-        if (err) return handleError(err);
-        console.log('The creator of this event is %s', event.creatorId.name);
-    })
-});
-
-router.get('/api/users/:id/events', function(req, res, next){
-    
-    Event
-    .find({creatorId: req.params.id})
-    .exec(function (err, events){
-        if (err) return handleError(err);
-        return res.status(200).json({"events": events});
-    })
-
-    /* Event
-    .find({creatorId: req.params.id})
-    .exec(function (err, events){
-        if (err) {return next(err); }
-        res.status(200).json({"events": events});
-    }); */
-
-});
-
-router.get('/api/users/:id/events/:id', function(req, res, next){
-
-});
-
-router.delete('/api/users/:id/events/:id', function(req, res, next){
-
 });
 
 module.exports = router;
