@@ -16,6 +16,10 @@ router.get('/api/events', function (req, res, next){
 
     Event.find(function(err, events){
         if (err) { return next(err); }
+        if (events == null) {
+            return res.status(404).json({"message": "Event not found"});
+        }
+        
         return res.status(200).json({"events": events});
     });
 });
@@ -39,12 +43,10 @@ router.get('/api/events/:id', function (req, res, next){
             return res.status(404).json({"message": "Event not found"});
         }
         
-        var returnedUser = event;
-        return res.status(200).json(returnedUser);
+        var returnedEvent = event;
+        return res.status(200).json(returnedEvent);
     })
 })
-
-//put and patch
 
 router.delete('/api/events/:id', function(req, res, next) {
     
@@ -56,6 +58,38 @@ router.delete('/api/events/:id', function(req, res, next) {
             return res.status(404).json({"message": "Event not found"});
         }
         return res.status(202).json(event);
+    });
+});
+
+router.put('/api/events/:id', function(req, res, next) {
+    var id = req.params.id;
+    Event.findById(id, function(err, event) {
+        if (err) { return next(err); }
+        if (event == null) {
+            return res.status(404).json({"message": "Event not found"});
+        }
+        event.event_id = req.body.event_id;
+        event.name = req.body.name;
+        event.attendeeIds = req.body.attendeeIds;
+        event.description = req.body.description;
+        event.clubIds = req.body.clubIds;
+        event.scheduleId = req.body.scheduleId;
+        event.save();
+        res.json(event);
+    });
+});
+
+router.patch('/api/events/:id', function(req, res, next) {
+    var id = req.params.id;
+    Event.findById(id, function(err, event) {
+        if (err) { return next(err); }
+        if (event == null) {
+            return res.status(404).json({"message": "Event not found"});
+        }
+        event.name = (req.body.name || event.name);
+        event.event_id = (req.body.event_id || event.event_id);
+        event.save();
+        res.json(event);
     });
 });
 
