@@ -76,6 +76,7 @@ router.get('/api/users/sort/:someAttribute/:order/', function (req, res, next){
             if (err) {throw err};
 
           return res.status(200).json({"users": users});
+          });
 });
 
 router.put('/api/users/:id', function(req, res, next) {
@@ -182,3 +183,4 @@ router.delete('/api/users/:user_id/events/:event_id', function(req, res, next){
 });
 
 module.exports = router;
+
