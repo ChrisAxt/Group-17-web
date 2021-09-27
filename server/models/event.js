@@ -4,11 +4,12 @@ var Schema = mongoose.Schema;
 //TODO: decide whether we are using the generatedID or our own 
 
 var eventSchema = new Schema({
-    event_id: {type: String},
-    name: {type: String},
-    scheduleId: {type: Array},
+    name: {type: String, required: 'Event name is required'},
     description: {type: String},
-    clubId: {type: Array},
+    isPublic: {type: Boolean},
+    //Relationship attributes
+    scheduleId: {type: Schema.Types.ObjectId, ref: 'Schedule'},
+    clubId: {type: Schema.Types.ObjectId, ref: 'Club'},
     creatorId: {type: Schema.Types.ObjectId, ref: 'User'},
     attendeeIds: {type: Array}
 });

@@ -86,7 +86,7 @@ router.put('/api/users/:id', function(req, res, next) {
         if (user == null) {
             return res.status(404).json({"message": "User not found"});
         }
-        user.user_id = req.body.user_id;
+        user.universityId = req.body.universityId;
         user.name = req.body.name;
         user.password = req.body.password;
         user.clubIds = req.body.clubIds;
@@ -134,6 +134,7 @@ router.post('/api/users/:user_id/events', function(req, res, next) {
     });
 
     //populate the creatorId field with user details
+    //TODO: check why this doesn't work anymore.
     event.populate('creatorId').exec(function (err, event){
         if (err) return handleError(err);
     });
