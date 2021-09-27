@@ -37,9 +37,9 @@ router.get('/api/events/:id', function (req, res, next){
     
     var id = req.params.id;
      
-    Event.find({_id: id}, function(err, event){
+    Event.findById(id, function(err, event){
         if (err) { return next(err); }
-        if (event == null) {
+        if (event === null) {
             return res.status(404).json({"message": "Event not found"});
         }
         

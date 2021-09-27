@@ -33,9 +33,9 @@ router.get('/api/clubs/:id', function (req, res, next){
     
     var id = req.params.id;
      
-    Club.find({_id: id}, function(err, Club){
+    Club.findById(id, function(err, Club){
         if (err) { return next(err); }
-        if (Club == null) {
+        if (Club === null) {
             return res.status(404).json({"message": "Club not found"});
         }
         
