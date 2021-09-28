@@ -2,7 +2,7 @@
 <body>
     <b-container class="bv-example-row">
 
-        <h1 class="logo"><img src="/images/logo.png"></h1>
+        <b-img :src="require('../assets/logo.png')"></b-img>
         <br><br><br><br><br><br><br><br>
         <div id="app">
             <h3>Welcome</h3>
