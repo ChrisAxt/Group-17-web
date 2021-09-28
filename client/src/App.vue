@@ -1,9 +1,10 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
+      <router-link to="/">App Start</router-link> |
       <router-link to="/SignIn">Sign In</router-link> |
-      <router-link to="/SignUp">Sign Up</router-link>
+      <router-link to="/SignUp">Sign Up</router-link> |
+      <router-link to="/MainHome">Home</router-link>
     </div>
     <!-- Render the content of the current page view -->
     <router-view/>
