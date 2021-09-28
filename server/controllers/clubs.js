@@ -5,10 +5,10 @@ var Club = require('../models/club');
 
 router.post('/api/clubs', function (req, res, next) {
     
-    var Club = new Club(req.body);
+    var club = new Club(req.body);
     Club.save(function (err) {
         if (err) { return next(err); }
-        res.status(201).json(Club);
+        res.status(201).json(club);
     });
 });
 
@@ -33,16 +33,15 @@ router.get('/api/clubs/:id', function (req, res, next){
     
     var id = req.params.id;
      
-    Club.find({_id: id}, function(err, Club){
+    Club.find({_id: id}, function(err, club){
         if (err) { return next(err); }
-        if (Club == null) {
+        if (club == null) {
             return res.status(404).json({"message": "Club not found"});
         }
         
-        var returnedClub = Club;
-        return res.status(200).json(returnedClub);
-    })
-})
+        return res.status(200).json(club);
+    });
+});
 
 //put and patch
 

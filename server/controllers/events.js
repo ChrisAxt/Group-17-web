@@ -5,11 +5,22 @@ var Event = require('../models/event');
 
 router.post('/api/events', function (req, res, next) {
     
+    try {
+        var event = new Event(req.body)
+        event.save();
+    } catch(err) {
+        return res.status(400).json({"message": "post failed"});
+    }
+    return res.status(201).json(event);
+    /*
     var event = new Event(req.body);
     event.save(function (err) {
-        if (err) { return next(err); }
+        if (err) { 
+            res.status(400).json({"message": "post failed"});
+            return next(err); }
         res.status(201).json(event);
     });
+    */
 });
 
 router.get('/api/events', function (req, res, next){
@@ -28,8 +39,7 @@ router.delete('/api/events', function (req, res, next){
 
     Event.deleteMany(function(err, events){
         if (err) { return next(err); }
-        //TODO: change res message
-        return res.status(202).json({"events": events});
+        return res.status(202).json({"deleted events": events});
     });
 });
 
