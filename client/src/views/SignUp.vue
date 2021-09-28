@@ -2,7 +2,7 @@
 <body>
     <b-container class="bv-example-row">
         <b-img :src="require('../assets/logo.png')"></b-img>
-        <br><br><br><br><br><br><br><br>
+        <br>
         <div id="app">
             <h3>Welcome</h3>
         </div>
@@ -42,7 +42,7 @@ input{
     background-color: lightgray;
 }
 button {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     transition-duration: 0.4s;
     background-color:gray;
     border-radius: 8px;
@@ -54,7 +54,9 @@ button:hover {
     background-color: gray;
     color: white;
 }
-.logo {
-    background: url('/images/logo.png');
+img {
+    background: url('/assets/logo.png');
+    width: 25%;
+    height: auto;
 }
 </style>
