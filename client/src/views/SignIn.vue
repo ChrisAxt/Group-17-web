@@ -1,4 +1,4 @@
-<template>
+<template lang="html">
 <body>
     <b-container class="bv-example-row">
 
