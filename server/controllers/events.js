@@ -85,7 +85,7 @@ router.delete('/api/events/:id', function(req, res, next) {
         if (event == null) {
             return res.status(404).json({"message": "event not found"});
         }
-        res.status(200).json({"event deleted": user});
+        res.status(200).json({"event deleted": event});
     });
 });
 
