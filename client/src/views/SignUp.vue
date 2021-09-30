@@ -21,6 +21,7 @@
             <div class="Sign-up-Button" style="text-align:center">
 
                 <b-button class="signUp" v-on:click="SignUp()" >Sign Up</b-button>
+                <br><br><br>
             </div>
 
     </b-col>

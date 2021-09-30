@@ -18,6 +18,7 @@
                 <br>
                 <router-link to="/SignUp"><b-button style="margin-left:0px;" variant="signUp">Sign Up</b-button></router-link>
                 <b-button style="margin-left:10%;" variant="signIn">Sign In</b-button>
+                <br><br><br><br><br><br><br>
             </div>
     </b-col>
 

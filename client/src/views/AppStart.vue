@@ -45,9 +45,9 @@ body {
   margin-bottom: 1em;
 }
 .jumbo{
-  color: red;
+  color:lightgray;
 }
 div {
-  color:red
+  color:lightgray;
 }
 </style>
