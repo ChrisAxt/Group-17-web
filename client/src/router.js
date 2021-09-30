@@ -3,8 +3,11 @@ import Router from 'vue-router'
 import AppStart from './views/AppStart.vue'
 import SignIn from './views/SignIn.vue'
 import SignUp from './views/SignUp.vue'
-import MainHome from './views/MainHome.vue'
-
+import Home from './views/Home.vue'
+import Clubs from './views/Clubs.vue'
+import Events from './views/Events.vue'
+import Schedule from './views/Schedule.vue'
+import Profile from './views/Profile.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -28,9 +31,30 @@ export default new Router({
       component: SignUp
     },
     {
-      path: '/MainHome',
-      name: 'mainHome',
-      component: MainHome
+      path: '/Home',
+      name: 'Home',
+      component: Home
+    },
+    {
+      path: '/Clubs',
+      name: 'clubs',
+      component: Clubs
+
+    },
+    {
+      path: '/Events',
+      name: 'events',
+      component: Events
+    },
+    {
+      path: '/Schedule',
+      name: 'schedule',
+      component: Schedule
+    },
+    {
+      path: '/Profile',
+      name: 'profile',
+      component: Profile
     }
   ]
 })

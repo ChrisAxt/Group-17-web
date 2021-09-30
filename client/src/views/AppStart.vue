@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-jumbotron header="DIT341 Frontend" lead="Welcome to your DIT341 Frontend Vue.js App">
+    <b-jumbotron class="jumbo" header="DIT341 Frontend" lead="Welcome to your DIT341 Frontend Vue.js App">
       <b-button class="btn_message" variant="primary" v-on:click="getMessage()" >Get Message from Server</b-button>
       <p>Message from the server:<br/>
       {{ message }}</p>
@@ -34,7 +34,20 @@ export default {
 </script>
 
 <style>
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background-color:#b4b4b4;
+}
 .btn_message {
   margin-bottom: 1em;
+}
+.jumbo{
+  color: red;
+}
+div {
+  color:red
 }
 </style>
