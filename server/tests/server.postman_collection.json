@@ -17,9 +17,9 @@
 								"exec": [
 									"var jsonData = pm.response.json();\r",
 									"\r",
-									"var id = jsonData._id;\r",
-									"pm.environment.set(\"_id\", id);\r",
-									"var getUserId = pm.variables.get(\"_id\");\r",
+									"var userId = jsonData._id;\r",
+									"pm.environment.set(\"user_id\", userId);\r",
+									"var getUserId = pm.variables.get(\"user_id\");\r",
 									"\r",
 									"var universityId = jsonData.universityId;\r",
 									"pm.environment.set(\"user_universityId\", universityId);\r",
@@ -33,9 +33,139 @@
 									"pm.environment.set(\"user_password\", userPassword);\r",
 									"var getUserName = pm.variables.get(\"user_password\");\r",
 									"\r",
-									"var userCreatedClubs = jsonData.createdClubs;\r",
-									"pm.environment.set(\"user_createdClubs\", userCreatedClubs);\r",
-									"var getUserCreatedClubs = pm.variables.get(\"user_createdClubs\");\r",
+									"var userClubIds = jsonData.clubIds;\r",
+									"pm.environment.set(\"user_clubIds\", userClubIds);\r",
+									"var getUserClubIds = pm.variables.get(\"user_clubIds\");\r",
+									"\r",
+									"var userEventIds = jsonData.eventIds;\r",
+									"pm.environment.set(\"user_eventIds\", userEventIds);\r",
+									"var getUserEventIds = pm.variables.get(\"user_eventIds\");\r",
+									"\r",
+									"pm.test(\"Staus code is 201\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"universityId\": \"1\",\r\n        \"name\": \"insertName\",\r\n        \"password\": \"password\",\r\n        \"clubIds\":[],\r\n        \"eventIds\": []\r\n    }"
+						},
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /api/users/id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/users/{{user_id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /api/users duplicate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"var userId = jsonData._id;\r",
+									"pm.environment.set(\"user_id\", userId);\r",
+									"var getUserId = pm.variables.get(\"user_id\");\r",
+									"\r",
+									"var universityId = jsonData.universityId;\r",
+									"pm.environment.set(\"user_universityId\", universityId);\r",
+									"var getUniversityId = pm.variables.get(\"user_universityId\");\r",
+									"\r",
+									"var userName = jsonData.name;\r",
+									"pm.environment.set(\"user_name\", userName);\r",
+									"var getUserName = pm.variables.get(\"user_name\");\r",
+									"\r",
+									"var userPassword = jsonData.password;\r",
+									"pm.environment.set(\"user_password\", userPassword);\r",
+									"var getUserName = pm.variables.get(\"user_password\");\r",
 									"\r",
 									"var userClubIds = jsonData.clubIds;\r",
 									"pm.environment.set(\"user_clubIds\", userClubIds);\r",
@@ -80,12 +210,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\r\n        \"UniversityId\": \"1\",\r\n        \"name\": \"insertName\",\r\n        \"password\": \"password\",\r\n        \"createdClubs\": [],\r\n        \"clubIds\":[],\r\n        \"eventIds\": []\r\n    }"
+							"raw": "    {\r\n        \"universityId\": \"1\",\r\n        \"name\": \"insertName\",\r\n        \"password\": \"password\",\r\n        \"clubIds\":[],\r\n        \"eventIds\": []\r\n    }"
 						},
 						"url": {
-							"raw": "{{HOST}}/api/users",
+							"raw": "{{host}}/api/users",
 							"host": [
-								"{{HOST}}"
+								"{{host}}"
 							],
 							"path": [
 								"api",
@@ -97,6 +227,19 @@
 				},
 				{
 					"name": "GET /api/users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Staus code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -120,35 +263,21 @@
 					"response": []
 				},
 				{
-					"name": "DELETE /api/users",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{host}}/api/users",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "SORT /api/users/sort/:user_id/:-1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Staus code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -186,6 +315,20 @@
 				},
 				{
 					"name": "FILTER /api/users/filter/:filterBy/:filterValue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Staus code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -232,6 +375,17 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Staus code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -273,13 +427,13 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"var responseJsonData = pm.response.json ();",
+									"var responseJsonData = pm.response.json();",
 									"var userId = responseJsonData._id;",
-									"var requestName = \"Carl\";",
 									"var responseName = responseJsonData.name;",
-									"pm.test(\"Name updated\", function(){",
-									"    pm.expect(requestName).to.eql(responseName);",
-									"});",
+									"var requestName = \"Carl\";",
+									"//pm.test(\"Name updated\", function(){",
+									" //   pm.expect(responseJsonData._id).to.eql(\"Carl\");",
+									"//});",
 									"",
 									"pm.test(\"Status code is 200\", function(){",
 									"    pm.response.to.have.status(200);",
@@ -305,7 +459,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"clubIds\": [],\n    \"eventIds\": [],\n    \"universityId\": \"1\",\n    \"name\": \"Carl\",\n    \"password\": \"password\",\n    \"__v\": 0\n}\n"
+							"raw": "{\n    \"universityId\": \"1\",\n    \"name\": \"Carl\",\n    \"password\": \"password\",\n    \"clubIds\": [],\n    \"eventIds\": [],\n    \"__v\": 0\n}\n"
 						},
 						"url": {
 							"raw": "{{host}}/api/users/{{user_id}}",
@@ -323,6 +477,19 @@
 				},
 				{
 					"name": "PUT /api/users/id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -341,13 +508,243 @@
 					"response": []
 				},
 				{
-					"name": "DELETE /api/users/id",
+					"name": "DELETE /api/users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 202\", function(){\r",
+									"    pm.response.to.have.status(202);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /api/users for relationship",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"var userId = jsonData._id;\r",
+									"pm.environment.set(\"user_id\", userId);\r",
+									"var getUserId = pm.variables.get(\"user_id\");\r",
+									"\r",
+									"var universityId = jsonData.universityId;\r",
+									"pm.environment.set(\"user_universityId\", universityId);\r",
+									"var getUniversityId = pm.variables.get(\"user_universityId\");\r",
+									"\r",
+									"var userName = jsonData.name;\r",
+									"pm.environment.set(\"user_name\", userName);\r",
+									"var getUserName = pm.variables.get(\"user_name\");\r",
+									"\r",
+									"var userPassword = jsonData.password;\r",
+									"pm.environment.set(\"user_password\", userPassword);\r",
+									"var getUserName = pm.variables.get(\"user_password\");\r",
+									"\r",
+									"var userClubIds = jsonData.clubIds;\r",
+									"pm.environment.set(\"user_clubIds\", userClubIds);\r",
+									"var getUserClubIds = pm.variables.get(\"user_clubIds\");\r",
+									"\r",
+									"var userEventIds = jsonData.eventIds;\r",
+									"pm.environment.set(\"user_eventIds\", userEventIds);\r",
+									"var getUserEventIds = pm.variables.get(\"user_eventIds\");\r",
+									"\r",
+									"pm.test(\"Staus code is 201\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"universityId\": \"user universityId example\",\r\n        \"name\": \"user name example\",\r\n        \"password\": \"user password example\",\r\n        \"clubIds\":[],\r\n        \"eventIds\": []\r\n    }"
+						},
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Event",
+			"item": [
+				{
+					"name": "POST /api/events",
 					"event": [
 						{
 							"listen": "prerequest",
 							"script": {
 								"exec": [
 									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"var eventId = jsonData._id;\r",
+									"pm.environment.set(\"event_id\", eventId);\r",
+									"var getEventId = pm.variables.get(\"event_id\");\r",
+									"\r",
+									"var eventName = jsonData.name;\r",
+									"pm.environment.set(\"event_name\", eventName);\r",
+									"var getEventName = pm.variables.get(\"event_name\");\r",
+									"\r",
+									"var eventDescription = jsonData.description;\r",
+									"pm.environment.set(\"event_description\", eventDescription);\r",
+									"var getEventDescription = pm.variables.get(\"event_description\");\r",
+									"\r",
+									"var eventIsPublic = jsonData.isPublic;\r",
+									"pm.environment.set(\"event_isPublic\", eventIsPublic);\r",
+									"var getEventIsPublic = pm.variables.get(\"event_isPublic\");\r",
+									"\r",
+									"var eventScheduleId = jsonData.scheduleId;\r",
+									"pm.environment.set(\"event_scheduleId\", eventScheduleId);\r",
+									"var getEventScheduleId = pm.variables.get(\"event_scheduleId\");\r",
+									"\r",
+									"var eventClubId = jsonData.clubId;\r",
+									"pm.environment.set(\"event_clubId\", eventClubId);\r",
+									"var getEventClubId = pm.variables.get(\"event_clubId\");\r",
+									"\r",
+									"var eventCreatorId = jsonData.creatorId;\r",
+									"pm.environment.set(\"event_creatorId\", eventCreatorId);\r",
+									"var getEventCreatorId = pm.variables.get(\"event_creatorId\");\r",
+									"\r",
+									"var eventAttendeeIds = jsonData.attendeeIds;\r",
+									"pm.environment.set(\"event_attendeeIds\", eventAttendeeIds);\r",
+									"var getEventAttendeeIds = pm.variables.get(\"event_attendeeIds\");\r",
+									"\r",
+									"pm.test(\"Staus code is 201\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"})\r",
+									";"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"event name example\",\r\n    \"description\": \"event description example\",\r\n    \"isPublic\": true,\r\n    \"attendeeIds\": []\r\n    }"
+						},
+						"url": {
+							"raw": "{{host}}/api/events",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /api/events/id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
 								],
 								"type": "text/javascript"
 							}
@@ -368,26 +765,21 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/users/{{user_id}}",
+							"raw": "{{host}}/api/events/{{event_id}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
-								"users",
-								"{{user_id}}"
+								"events",
+								"{{event_id}}"
 							]
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "Event",
-			"item": [
+				},
 				{
-					"name": "POST /api/events",
+					"name": "POST /api/events duplicate",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -478,6 +870,19 @@
 				},
 				{
 					"name": "GET /api/events",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Staus code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -501,34 +906,6 @@
 					"response": []
 				},
 				{
-					"name": "DELETE /api/events",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{host}}/api/events",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"events"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "GET /api/events/id",
 					"event": [
 						{
@@ -536,6 +913,17 @@
 							"script": {
 								"exec": [
 									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Staus code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
 								],
 								"type": "text/javascript"
 							}
@@ -575,6 +963,17 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -601,32 +1000,23 @@
 					"response": []
 				},
 				{
-					"name": "DELETE /api/events/id",
+					"name": "PUT /api/events/id",
 					"event": [
 						{
-							"listen": "prerequest",
+							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
 								],
 								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
+						"method": "PUT",
+						"header": [],
 						"url": {
 							"raw": "{{host}}/api/events/{{event_id}}",
 							"host": [
@@ -642,19 +1032,41 @@
 					"response": []
 				},
 				{
-					"name": "PUT /api/events/id",
+					"name": "DELETE /api/events",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 202\", function(){\r",
+									"    pm.response.to.have.status(202);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
-						"method": "PUT",
-						"header": [],
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
-							"raw": "{{host}}/api/events/{{event_id}}",
+							"raw": "{{host}}/api/events",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
-								"events",
-								"{{event_id}}"
+								"events"
 							]
 						}
 					},
@@ -679,8 +1091,8 @@
 									"var getEventId = pm.variables.get(\"event_id\");\r",
 									"\r",
 									"var eventName = jsonData.name;\r",
-									"pm.environment.set(\"name\", eventName);\r",
-									"var getEventName = pm.variables.get(\"name\");\r",
+									"pm.environment.set(\"event_name\", eventName);\r",
+									"var getEventName = pm.variables.get(\"event_name\");\r",
 									"\r",
 									"var eventDescription = jsonData.description;\r",
 									"pm.environment.set(\"event_description\", eventDescription);\r",
@@ -728,7 +1140,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"nameInsert\",\r\n    \"description\": \"everybody... yeaaaaaah\",\r\n    \"isPublic\": true,\r\n    \"scheduleId\": \"\",\r\n    \"clubId\": \"\",\r\n    \"attendeeIds\": []\r\n}"
+							"raw": "{\r\n    \"name\": \"event name example\",\r\n    \"description\": \"event description example\",\r\n    \"isPublic\": true,\r\n    \"attendeeIds\": []\r\n}"
 						},
 						"url": {
 							"raw": "{{host}}/api/users/{{user_id}}/events",
@@ -747,6 +1159,19 @@
 				},
 				{
 					"name": "GET /api/users/user_id/events",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Staus code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -773,6 +1198,19 @@
 				},
 				{
 					"name": "GET /api/users/user_id/events/event_id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Staus code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -806,6 +1244,17 @@
 							"script": {
 								"exec": [
 									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Staus code is 202\", function(){\r",
+									"    pm.response.to.have.status(202);\r",
+									"})"
 								],
 								"type": "text/javascript"
 							}
