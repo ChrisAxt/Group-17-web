@@ -5,76 +5,96 @@ var Event = require('../models/event');
 
 router.post('/api/events', function (req, res, next) {
     
-    try {
+    //TODO: this gives error
+    var event = new Event(req.body);
+    event.save(function (err) {
+        if (err) { 
+            res.status(400).json({"message": "post failed"});
+            return next(err); 
+        }
+        res.status(201).json(event);
+    });
+   
+    /* try {
         var event = new Event(req.body)
         event.save();
     } catch(err) {
         return res.status(400).json({"message": "post failed"});
     }
-    return res.status(201).json(event);
-    /*
-    var event = new Event(req.body);
-    event.save(function (err) {
-        if (err) { 
-            res.status(400).json({"message": "post failed"});
-            return next(err); }
-        res.status(201).json(event);
-    });
-    */
+    return res.status(201).json(event); */
 });
 
 router.get('/api/events', function (req, res, next){
 
     Event.find(function(err, events){
-        if (err) { return next(err); }
-        if (events == null) {
-            return res.status(404).json({"message": "Event not found"});
+        if (err) { 
+            res.status(500).json({"message": "get failed"});
+            return next(err); 
         }
-        
-        return res.status(200).json({"events": events});
+        if (events.length === 0 || events == null) {
+            return res.status(404).json({"message": "empty collection"});
+        }
+        res.status(200).json({"events": events});
     });
 });
 
 router.delete('/api/events', function (req, res, next){
 
-    Event.deleteMany(function(err, events){
+    Event.find(function(err, events){
+        if (err) { 
+            res.status(500).json({"message": "get failed"});
+            return next(err);
+        }
+        if (events.length === 0){
+            return res.status(404).json({"message": "empty collection"});
+        }
+        Event.deleteMany(function(err, events){
+            if (err) { 
+                res.status(500).json({"message": "delete all failed"});
+                return next(err); 
+            }
+            return res.status(202).json({"deleted events": events});
+        });
+    });
+
+    /* Event.deleteMany(function(err, events){
         if (err) { return next(err); }
         return res.status(202).json({"deleted events": events});
-    });
+    }); */
 });
 
 router.get('/api/events/:id', function (req, res, next){
-    
-    var id = req.params.id;
      
-    Event.find({_id: id}, function(err, event){
-        if (err) { return next(err); }
-        if (event == null) {
-            return res.status(404).json({"message": "Event not found"});
+    Event.findById({_id: req.params.id}, function(err, event){
+        if (err) { 
+            return res.status(500).json({"message": "get failed"}); 
         }
-        
-        var returnedEvent = event;
-        return res.status(200).json(returnedEvent);
-    })
+        if (event == null) {
+            return res.status(404).json({"message": "event not found"});
+        }
+        res.status(200).json(event);
+    });
 })
 
 router.delete('/api/events/:id', function(req, res, next) {
     
-    var id = req.params.id;
-    
-    Event.findOneAndDelete({_id: id}, function(err, event) {
-        if (err) { return next(err); }
+    Event.findOneAndDelete({_id: req.params.id}, function(err, event) {
+        if (err) { 
+            res.status(500).json({"message": "delete failed"});
+            return next(err); }
         if (event == null) {
-            return res.status(404).json({"message": "Event not found"});
+            return res.status(404).json({"message": "event not found"});
         }
-        return res.status(202).json(event);
+        res.status(200).json({"event deleted": user});
     });
 });
 
 router.put('/api/events/:id', function(req, res, next) {
-    var id = req.params.id;
-    Event.findById(id, function(err, event) {
-        if (err) { return next(err); }
+
+    Event.findById({_id: req.params.id}, function(err, event) {
+        if (err) { 
+            res.status(500).json({"message": "put failed"});
+            return next(err); }
         if (event == null) {
             return res.status(404).json({"message": "Event not found"});
         }
@@ -85,21 +105,23 @@ router.put('/api/events/:id', function(req, res, next) {
         event.clubIds = req.body.clubIds;
         event.scheduleId = req.body.scheduleId;
         event.save();
-        res.json(event);
+        res.status(200).json({"event updated via put": event});
     });
 });
 
 router.patch('/api/events/:id', function(req, res, next) {
-    var id = req.params.id;
-    Event.findById(id, function(err, event) {
-        if (err) { return next(err); }
+    
+    Event.findById({_id: req.params.id}, function(err, event) {
+        if (err) { 
+            res.status(500).json({"message": "patch failed"});
+            return next(err); }
         if (event == null) {
             return res.status(404).json({"message": "Event not found"});
         }
         event.name = (req.body.name || event.name);
         event.event_id = (req.body.event_id || event.event_id);
         event.save();
-        res.json(event);
+        res.status(200).json({"event updated via patch": event});
     });
 });
 
