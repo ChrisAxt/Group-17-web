@@ -10,17 +10,16 @@
   <b-row>
     <b-col></b-col>
     <b-col>
-            <b-form-input placeholder="University ID" list="input-list" id="input-with-list"></b-form-input>
+            <b-form-input placeholder="University ID" list="input-list" id="input-with-list" v-model="newUser.universityId"></b-form-input>
             <br>
-            <b-form-input placeholder="Name" list="input-list" id="input-with-list"></b-form-input>
+            <b-form-input placeholder="Name" list="input-list" id="input-with-list" v-model="newUser.name"></b-form-input>
             <br>
-            <b-form-input placeholder="Password" list="input-list" id="input-with-list"></b-form-input>
+            <b-form-input placeholder="Password" list="input-list" id="input-with-list" v-model="newUser.password"></b-form-input>
             <br>
             <b-form-input placeholder="Confirm password" list="input-list" id="input-with-list"></b-form-input>
             <br>
             <div class="Sign-up-Button" style="text-align:center">
-
-                <b-button class="signUp" v-on:click="SignUp()" >Sign Up</b-button>
+                <b-button class="signUp" v-on:click="SignUp">Sign Up</b-button>
                 <br><br><br>
             </div>
 
@@ -41,14 +40,16 @@ export default {
   name: 'home',
   data() {
     return {
-      universityId: FormData.data.universityId,
-      name: FormData.data.name,
-      password: FormData.data.password
+      newUser: {
+        universityId: '',
+        name: '',
+        password: ''
+      }
     }
   },
   methods: {
     SignUp() {
-      Api.post('/users')
+      Api.post('/users', this.newUser)
         .catch(error => {
           this.message = error
         })
