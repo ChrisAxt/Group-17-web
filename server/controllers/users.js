@@ -15,15 +15,6 @@ router.post('/api/users', function (req, res, next) {
             }
         res.status(201).json(user);
     });
-
-    /* try {
-        var user = new User(req.body);
-        user.save();
-    } catch(err) {
-        return res.status(400).json({"message": "post failed"});
-    }
-    return res.status(201).json(user); */
-
 });
 
 router.get('/api/users', function (req, res, next){
@@ -39,19 +30,6 @@ router.get('/api/users', function (req, res, next){
         res.status(200).json({"users": users});
     });
 
-    /* try {
-        var users = User.find();
-    } catch(err) {
-        return res.status(404).json({"message": "get failed"});
-    }
-    return res.status(200).json({"users": users}); */
-
-    /* User.find(function(err, users){
-        if (err) { 
-            res.status(404).json({"message": "get failed"});
-            return next(err); }
-        return res.status(200).json({"users": users});
-    }); */ 
 });
 
 router.delete('/api/users', function (req, res, next){
@@ -74,21 +52,10 @@ router.delete('/api/users', function (req, res, next){
         });
     });    
 
-    /* try {
-        var users = User.find();
-        if (users.length === 0){
-            return res.status(404).json({"message": "empty collection"});
-        }
-        users = User.deleteMany();
-    } catch(err) {
-        return res.status(500).json({"message": "delete all failed"});
-    }
-    return res.status(202).json({"deleted users": users}); */
 });
 
 router.get('/api/users/:id', function (req, res, next){
     
-    //TODO: Change this to match sort function ()
     User.findById({_id: req.params.id}, function(err, user){
         if (err) { 
             return res.status(500).json({"message": "get failed"}); 
@@ -99,15 +66,6 @@ router.get('/api/users/:id', function (req, res, next){
         res.status(200).json(user);
     });
 
-    /* try {
-        var user = User.findById({_id: req.params.id});
-    } catch(err) {
-        if (user == null) {
-            return res.status(404).json({"message": "User not found"});
-        }
-        return res.status(500).json({"message": "get failed"});
-    }
-    return res.status(200).json(user); */
 });
 
 //Filter function
@@ -126,16 +84,6 @@ router.get('/api/users/filter/:filterBy/:filterValue', function (req, res, next)
         }
         res.status(200).json(users);
     });
-
-    /* try{
-        var users = User.find(myFilter);
-    } catch(err) {
-        if (users == null || users.length === 0) {
-            return res.status(404).json({"message": "Users not found"});
-        }
-        return res.status(500).json({"message": "get failed"});
-    }
-    return res.status(200).json({"users": users}); */
 });
 
 //Sorting function
@@ -222,18 +170,6 @@ router.post('/api/users/:user_id/events', function(req, res, next) {
     /* event.populate('creatorId').exec(function (err, event){
         if (err) return handleError(err);
     }); */
-
-    /* try{
-        var event = new Event(req.body);
-        event.creatorId = req.params.user_id;
-        //populate the creatorId field with user details
-        //TODO: check why this doesn't work anymore.
-        event.populate('creatorId');
-        event.save();
-    } catch(err) {
-        return res.status(400).json({"message": "post failed"});
-    }
-    return res.status(201).json({"event created": event}); */
 });
 
 router.get('/api/users/:user_id/events', function(req, res, next){
@@ -246,13 +182,6 @@ router.get('/api/users/:user_id/events', function(req, res, next){
             return next(err); }
         res.status(200).json({"events": events});
     });
-
-    /* try {
-        var events = Event.find({creatorId: req.params.user_id});
-    } catch(err) {
-        return res.status(500).json({"message": "get failed"});
-    }
-    return res.status(200).json({"events": events}); */
 });
 
 router.get('/api/users/:user_id/events/:event_id', function(req, res, next){
@@ -266,16 +195,6 @@ router.get('/api/users/:user_id/events/:event_id', function(req, res, next){
         }
         res.status(200).json({"event": event});
     });
-
-    /* try {
-        var event = Event.findOne({_id: req.params.event_id, creatorId: req.params.user_id});
-    } catch(err) {
-        if (event == null) {
-            return res.status(404).json({"message": "event not found"});
-        }
-        return res.status(500).json({"message": "get failed"});
-    }
-    res.status(200).json({"event": event}); */
 });
 
 router.delete('/api/users/:user_id/events/:event_id', function(req, res, next){
