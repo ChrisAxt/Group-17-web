@@ -7,7 +7,10 @@ router.post('/api/clubs', function (req, res, next) {
     
     var club = new Club(req.body);
     Club.save(function (err) {
-        if (err) { return next(err); }
+        if (err) { 
+            res.status(400).json({"message": "post failed"});
+            return next(err);
+            }
         res.status(201).json(club);
     });
 });
@@ -15,47 +18,65 @@ router.post('/api/clubs', function (req, res, next) {
 router.get('/api/clubs', function (req, res, next){
 
     Club.find(function(err, clubs){
-        if (err) { return next(err); }
-        return res.status(200).json({"clubs": clubs});
+        if (err) { 
+            res.status(500).json({"message": "get failed"});
+            return next(err);
+        }
+        if (clubs.length === 0 || clubs == null){
+            return res.status(404).json({"message": "empty collection"});
+        }
+        res.status(200).json({"clubs": clubs});
     });
+
 });
 
 router.delete('/api/clubs', function (req, res, next){
 
-    Club.deleteMany(function(err, clubs){
-        if (err) { return next(err); }
-        //TODO: change res message
-        return res.status(202).json({"clubs": clubs});
-    });
+    Clubs.find(function(err, clubs){
+        if (err) { 
+            res.status(500).json({"message": "get failed"});
+            return next(err);
+        }
+        if (clubs.length === 0){
+            return res.status(404).json({"message": "empty collection"});
+        }
+        Club.deleteMany(function(err, clubs){
+            if (err) { 
+                res.status(500).json({"message": "delete all failed"});
+                return next(err); 
+            }
+            return res.status(202).json({"deleted clubs": clubs});
+        });
+    });    
 });
 
 router.get('/api/clubs/:id', function (req, res, next){
     
-    var id = req.params.id;
-     
-    Club.find({_id: id}, function(err, club){
-        if (err) { return next(err); }
-        if (club == null) {
-            return res.status(404).json({"message": "Club not found"});
+    Club.findById({_id: req.params.id}, function(err, club){
+        if (err) { 
+            res.status(500).json({"message": "get failed"});
+            return next(err); 
         }
-        
-        return res.status(200).json(club);
+        if (club == null) {
+            return res.status(404).json({"message": "club not found"});
+        }
+        res.status(200).json(club);
+    });
+});
+
+router.delete('/api/clubs/:id', function(req, res, next) {
+    
+    Club.findOneAndDelete({_id: req.params.id}, function(err, club) {
+        if (err) { 
+            res.status(500).json({"message": "delete failed"});
+            return next(err); }
+        if (club == null) {
+            return res.status(404).json({"message": "club not found"});
+        }
+        res.status(200).json({"club deleted": club});
     });
 });
 
 //put and patch
-
-router.delete('/api/clubs/:id', function(req, res, next) {
-    
-    var id = req.params.id;
-    
-    Club.findOneAndDelete({_id: id}, function(err, Club) {
-        if (err) { return next(err); }
-        if (Club == null) {
-            return res.status(404).json({"message": "Club not found"});
-        }
-        return res.status(202).json(Club);
-    });
-});
 
 module.exports = router;

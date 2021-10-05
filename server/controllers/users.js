@@ -58,10 +58,11 @@ router.get('/api/users/:id', function (req, res, next){
     
     User.findById({_id: req.params.id}, function(err, user){
         if (err) { 
-            return res.status(500).json({"message": "get failed"}); 
+            res.status(500).json({"message": "get failed"}); 
+            return next(err);
         }
         if (user == null) {
-            return res.status(404).json({"message": "user not found"});
+            res.status(404).json({"message": "user not found"});
         }
         res.status(200).json(user);
     });
