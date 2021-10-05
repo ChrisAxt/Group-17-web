@@ -25,7 +25,13 @@
         <div class="col-md-4">
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center experience"><span>Clubs</span></div><br>
-                <div class="col-md-12"></div> <br>
+                <div class="col-md-12">
+                    <b-container class="bv-example-row">
+                    <b-row align-h="end">
+                        <b-col cols="4"><events-object/></b-col>
+                    </b-row>
+                    </b-container>
+                </div> <br>
                 <div class="col-md-12"></div>
             </div>
         </div>

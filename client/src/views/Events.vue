@@ -7,14 +7,25 @@
             <b-container>
                 <b-col></b-col>
                 <b-col>
-                    <h1 text-align="center">Events</h1>
+                    <h1 text-align="center">All Events</h1>
+                    <br>
+                    <events-object/>
+                    <events-object/>
+                    <events-object/>
+                    <events-object/>
+                    <events-object/>
+                    <events-object/>
+                    <events-object/>
+                    <events-object/>
+                    <events-object/>
+                    <events-object/>
                     <events-object/>
                     <events-object/>
                     <events-object/>
                 </b-col>
                 <b-col></b-col>
             </b-container>
-            <br><br><br><br><br>
+            <br><br><br><br>
         </div>
 
     </body>

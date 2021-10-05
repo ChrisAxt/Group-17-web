@@ -3,6 +3,18 @@
         <div>
             <main-navbar/>
             <clubs-sidebar/>
+            <br>
+            <b-container>
+                <b-col></b-col>
+                <b-col>
+                    <br><br>
+                    <h1 text-align="center">Today</h1>
+                    <br>
+                    <events-object/>
+                    <br><br>
+                </b-col>
+            <br>
+            </b-container>
         </div>
 
     </body>
@@ -10,6 +22,7 @@
 <script>
 import ClubsSidebar from '@/components/ClubsSidebar.vue'
 import MainNavbar from '@/components/MainNavbar.vue'
+import EventsObject from '@/components/EventsObject.vue'
 
-export default ({ components: { ClubsSidebar, MainNavbar } })
+export default ({ components: { ClubsSidebar, MainNavbar, EventsObject } })
 </script>
