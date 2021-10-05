@@ -32,7 +32,7 @@ router.get('/api/clubs', function (req, res, next){
 
 router.delete('/api/clubs', function (req, res, next){
 
-    Clubs.find(function(err, clubs){
+    Club.find(function(err, clubs){
         if (err) { 
             res.status(500).json({"message": "get failed"});
             return next(err);
