@@ -43,6 +43,7 @@
 									"\r",
 									"pm.test(\"Staus code is 201\", function(){\r",
 									"    pm.response.to.have.status(201);\r",
+									"\r",
 									"})\r",
 									""
 								],
@@ -143,7 +144,7 @@
 					"response": []
 				},
 				{
-					"name": "POST /api/users duplicate",
+					"name": "POST /api/users for delete collection",
 					"event": [
 						{
 							"listen": "test",
@@ -210,7 +211,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\r\n        \"universityId\": \"1\",\r\n        \"name\": \"insertName\",\r\n        \"password\": \"password\",\r\n        \"clubIds\":[],\r\n        \"eventIds\": []\r\n    }"
+							"raw": "    {\r\n        \"universityId\": \"12345\",\r\n        \"name\": \"insertName\",\r\n        \"password\": \"password\",\r\n        \"clubIds\":[],\r\n        \"eventIds\": []\r\n    }"
 						},
 						"url": {
 							"raw": "{{host}}/api/users",
@@ -329,6 +330,9 @@
 							}
 						}
 					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [
@@ -338,25 +342,29 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
-							"raw": "{{HOST}}/api/users/filter/:name/:edss",
+							"raw": "{{host}}/api/users/filter/:universityId/:{{user_universityId}}",
 							"host": [
-								"{{HOST}}"
+								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
 								"filter",
-								":name",
-								":edss"
+								":universityId",
+								":{{user_universityId}}"
 							],
 							"variable": [
 								{
-									"key": "name",
+									"key": "universityId",
 									"value": null
 								},
 								{
-									"key": "edss",
+									"key": "{{user_universityId}}",
 									"value": null
 								}
 							]
@@ -427,17 +435,36 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"var responseJsonData = pm.response.json();",
-									"var userId = responseJsonData._id;",
-									"var responseName = responseJsonData.name;",
-									"var requestName = \"Carl\";",
-									"//pm.test(\"Name updated\", function(){",
-									" //   pm.expect(responseJsonData._id).to.eql(\"Carl\");",
-									"//});",
+									"var jsonData = pm.response.json();",
+									"",
+									"var universityId = jsonData.universityId;",
+									"pm.environment.set(\"user_universityId\", universityId);",
+									"var getUniversityId = pm.variables.get(\"user_universityId\");",
+									"",
+									"var userName = jsonData.name;",
+									"pm.environment.set(\"user_name\", userName);",
+									"var getUserName = pm.variables.get(\"user_name\");",
+									"",
+									"var userPassword = jsonData.password;",
+									"pm.environment.set(\"user_password\", userPassword);",
+									"var getUserName = pm.variables.get(\"user_password\");",
+									"",
+									"var userClubIds = jsonData.clubIds;",
+									"pm.environment.set(\"user_clubIds\", userClubIds);",
+									"var getUserClubIds = pm.variables.get(\"user_clubIds\");",
+									"",
+									"var userEventIds = jsonData.eventIds;",
+									"pm.environment.set(\"user_eventIds\", userEventIds);",
+									"var getUserEventIds = pm.variables.get(\"user_eventIds\");",
+									"",
+									"pm.test(\"Update successful\", function () {",
+									"    pm.expect(jsonData.name).to.eql(pm.variables.get(\"user_name\"));",
+									"});",
 									"",
 									"pm.test(\"Status code is 200\", function(){",
 									"    pm.response.to.have.status(200);",
-									"})"
+									"})",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -459,7 +486,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"universityId\": \"1\",\n    \"name\": \"Carl\",\n    \"password\": \"password\",\n    \"clubIds\": [],\n    \"eventIds\": [],\n    \"__v\": 0\n}\n"
+							"raw": "{\n    \"universityId\": \"1\",\n    \"name\": \"Carl\",\n    \"password\": \"password\",\n    \"clubIds\": [],\n    \"eventIds\": []\n}\n"
 						},
 						"url": {
 							"raw": "{{host}}/api/users/{{user_id}}",
@@ -482,6 +509,20 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"var userName = jsonData.name;\r",
+									"pm.environment.set(\"user_name\", userName);\r",
+									"var getUserName = pm.variables.get(\"user_name\");\r",
+									"\r",
+									"var userPassword = jsonData.password;\r",
+									"pm.environment.set(\"user_password\", userPassword);\r",
+									"var getUserName = pm.variables.get(\"user_password\");\r",
+									"\r",
+									"pm.test(\"Update successful\", function () {\r",
+									"    pm.expect(jsonData.name).to.eql(pm.variables.get(\"user_name\"));\r",
+									"});\r",
+									"\r",
 									"pm.test(\"Status code is 200\", function(){\r",
 									"    pm.response.to.have.status(200);\r",
 									"})"
@@ -493,6 +534,15 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"John\",\r\n    \"password\": \"betterPassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{host}}/api/users/{{user_id}}",
 							"host": [
@@ -534,89 +584,6 @@
 						"body": {
 							"mode": "raw",
 							"raw": ""
-						},
-						"url": {
-							"raw": "{{host}}/api/users",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "POST /api/users for relationship",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = pm.response.json();\r",
-									"\r",
-									"var userId = jsonData._id;\r",
-									"pm.environment.set(\"user_id\", userId);\r",
-									"var getUserId = pm.variables.get(\"user_id\");\r",
-									"\r",
-									"var universityId = jsonData.universityId;\r",
-									"pm.environment.set(\"user_universityId\", universityId);\r",
-									"var getUniversityId = pm.variables.get(\"user_universityId\");\r",
-									"\r",
-									"var userName = jsonData.name;\r",
-									"pm.environment.set(\"user_name\", userName);\r",
-									"var getUserName = pm.variables.get(\"user_name\");\r",
-									"\r",
-									"var userPassword = jsonData.password;\r",
-									"pm.environment.set(\"user_password\", userPassword);\r",
-									"var getUserName = pm.variables.get(\"user_password\");\r",
-									"\r",
-									"var userClubIds = jsonData.clubIds;\r",
-									"pm.environment.set(\"user_clubIds\", userClubIds);\r",
-									"var getUserClubIds = pm.variables.get(\"user_clubIds\");\r",
-									"\r",
-									"var userEventIds = jsonData.eventIds;\r",
-									"pm.environment.set(\"user_eventIds\", userEventIds);\r",
-									"var getUserEventIds = pm.variables.get(\"user_eventIds\");\r",
-									"\r",
-									"pm.test(\"Staus code is 201\", function(){\r",
-									"    pm.response.to.have.status(201);\r",
-									"\r",
-									"})\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "    {\r\n        \"universityId\": \"user universityId example\",\r\n        \"name\": \"user name example\",\r\n        \"password\": \"user password example\",\r\n        \"clubIds\":[],\r\n        \"eventIds\": []\r\n    }"
 						},
 						"url": {
 							"raw": "{{host}}/api/users",
@@ -779,7 +746,7 @@
 					"response": []
 				},
 				{
-					"name": "POST /api/events duplicate",
+					"name": "POST /api/events for delete collection",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -968,6 +935,40 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"var eventName = jsonData.name;\r",
+									"pm.environment.set(\"event_name\", eventName);\r",
+									"var getEventName = pm.variables.get(\"event_name\");\r",
+									"\r",
+									"var eventDescription = jsonData.description;\r",
+									"pm.environment.set(\"event_description\", eventDescription);\r",
+									"var getEventDescription = pm.variables.get(\"event_description\");\r",
+									"\r",
+									"var eventIsPublic = jsonData.isPublic;\r",
+									"pm.environment.set(\"event_isPublic\", eventIsPublic);\r",
+									"var getEventIsPublic = pm.variables.get(\"event_isPublic\");\r",
+									"\r",
+									"var eventScheduleId = jsonData.scheduleId;\r",
+									"pm.environment.set(\"event_scheduleId\", eventScheduleId);\r",
+									"var getEventScheduleId = pm.variables.get(\"event_scheduleId\");\r",
+									"\r",
+									"var eventClubId = jsonData.clubId;\r",
+									"pm.environment.set(\"event_clubId\", eventClubId);\r",
+									"var getEventClubId = pm.variables.get(\"event_clubId\");\r",
+									"\r",
+									"var eventCreatorId = jsonData.creatorId;\r",
+									"pm.environment.set(\"event_creatorId\", eventCreatorId);\r",
+									"var getEventCreatorId = pm.variables.get(\"event_creatorId\");\r",
+									"\r",
+									"var eventAttendeeIds = jsonData.attendeeIds;\r",
+									"pm.environment.set(\"event_attendeeIds\", eventAttendeeIds);\r",
+									"var getEventAttendeeIds = pm.variables.get(\"event_attendeeIds\");\r",
+									"\r",
+									"pm.test(\"Update successful\", function () {\r",
+									"    pm.expect(jsonData.name).to.eql(pm.variables.get(\"event_name\"));\r",
+									"});\r",
+									"\r",
 									"pm.test(\"Status code is 200\", function(){\r",
 									"    pm.response.to.have.status(200);\r",
 									"})"
@@ -985,6 +986,15 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"event name patch update\",\r\n    \"description\": \"event description patch update\",\r\n    \"isPublic\": false,\r\n    \"attendeeIds\": []\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{host}}/api/events/{{event_id}}",
 							"host": [
@@ -1006,6 +1016,24 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"var eventName = jsonData.name;\r",
+									"pm.environment.set(\"event_name\", eventName);\r",
+									"var getEventName = pm.variables.get(\"event_name\");\r",
+									"\r",
+									"var eventDescription = jsonData.description;\r",
+									"pm.environment.set(\"event_description\", eventDescription);\r",
+									"var getEventDescription = pm.variables.get(\"event_description\");\r",
+									"\r",
+									"var eventIsPublic = jsonData.isPublic;\r",
+									"pm.environment.set(\"event_isPublic\", eventIsPublic);\r",
+									"var getEventIsPublic = pm.variables.get(\"event_isPublic\");\r",
+									"\r",
+									"pm.test(\"Update successful\", function () {\r",
+									"    pm.expect(jsonData.name).to.eql(pm.variables.get(\"event_name\"));\r",
+									"});\r",
+									"\r",
 									"pm.test(\"Status code is 200\", function(){\r",
 									"    pm.response.to.have.status(200);\r",
 									"})"
@@ -1017,6 +1045,15 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"event name put update\",\r\n    \"description\": \"event description put update\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{host}}/api/events/{{event_id}}",
 							"host": [
@@ -1078,6 +1115,89 @@
 			"name": "Relationships",
 			"item": [
 				{
+					"name": "POST /api/users for relationship",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"var userId = jsonData._id;\r",
+									"pm.environment.set(\"user_id\", userId);\r",
+									"var getUserId = pm.variables.get(\"user_id\");\r",
+									"\r",
+									"var universityId = jsonData.universityId;\r",
+									"pm.environment.set(\"user_universityId\", universityId);\r",
+									"var getUniversityId = pm.variables.get(\"user_universityId\");\r",
+									"\r",
+									"var userName = jsonData.name;\r",
+									"pm.environment.set(\"user_name\", userName);\r",
+									"var getUserName = pm.variables.get(\"user_name\");\r",
+									"\r",
+									"var userPassword = jsonData.password;\r",
+									"pm.environment.set(\"user_password\", userPassword);\r",
+									"var getUserName = pm.variables.get(\"user_password\");\r",
+									"\r",
+									"var userClubIds = jsonData.clubIds;\r",
+									"pm.environment.set(\"user_clubIds\", userClubIds);\r",
+									"var getUserClubIds = pm.variables.get(\"user_clubIds\");\r",
+									"\r",
+									"var userEventIds = jsonData.eventIds;\r",
+									"pm.environment.set(\"user_eventIds\", userEventIds);\r",
+									"var getUserEventIds = pm.variables.get(\"user_eventIds\");\r",
+									"\r",
+									"pm.test(\"Staus code is 201\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"universityId\": \"user universityId example\",\r\n        \"name\": \"user name example\",\r\n        \"password\": \"user password example\",\r\n        \"clubIds\":[],\r\n        \"eventIds\": []\r\n    }"
+						},
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "POST /api/users/user_id/events",
 					"event": [
 						{
@@ -1102,9 +1222,21 @@
 									"pm.environment.set(\"event_isPublic\", eventIsPublic);\r",
 									"var getEventIsPublic = pm.variables.get(\"event_isPublic\");\r",
 									"\r",
-									"var creatorId = pm.variables.get(\"user_id\");\r",
-									"pm.environment.set(\"event_creatorId\", creatorId);\r",
+									"var eventScheduleId = jsonData.scheduleId;\r",
+									"pm.environment.set(\"event_scheduleId\", eventScheduleId);\r",
+									"var getEventScheduleId = pm.variables.get(\"event_scheduleId\");\r",
+									"\r",
+									"var eventClubId = jsonData.clubId;\r",
+									"pm.environment.set(\"event_clubId\", eventClubId);\r",
+									"var getEventClubId = pm.variables.get(\"event_clubId\");\r",
+									"\r",
+									"var eventCreatorId = jsonData.creatorId;\r",
+									"pm.environment.set(\"event_creatorId\", eventCreatorId);\r",
 									"var getEventCreatorId = pm.variables.get(\"event_creatorId\");\r",
+									"\r",
+									"var eventAttendeeIds = jsonData.attendeeIds;\r",
+									"pm.environment.set(\"event_attendeeIds\", eventAttendeeIds);\r",
+									"var getEventAttendeeIds = pm.variables.get(\"event_attendeeIds\");\r",
 									"\r",
 									"pm.test(\"Staus code is 201\", function(){\r",
 									"    pm.response.to.have.status(201);\r",
@@ -1140,7 +1272,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"event name example\",\r\n    \"description\": \"event description example\",\r\n    \"isPublic\": true,\r\n    \"attendeeIds\": []\r\n}"
+							"raw": "{\r\n    \"name\": \"event name example relationship\",\r\n    \"description\": \"event description example\",\r\n    \"isPublic\": true,\r\n    \"attendeeIds\": []\r\n}"
 						},
 						"url": {
 							"raw": "{{host}}/api/users/{{user_id}}/events",

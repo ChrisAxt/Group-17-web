@@ -72,8 +72,8 @@ router.get('/api/users/:id', function (req, res, next){
 //Filter function
 router.get('/api/users/filter/:filterBy/:filterValue', function (req, res, next){
 
-    var filter = req.params.filterBy.substring(1);
-    var filterValue = req.params.filterValue.substring(1);
+    var filter = req.params.filterBy;
+    var filterValue = req.params.filterValue;
     var myFilter = {};
     
     myFilter[filter] = filterValue
@@ -166,11 +166,6 @@ router.post('/api/users/:user_id/events', function(req, res, next) {
         }
         res.status(201).json({"event created": event});
     });
-    //populate the creatorId field with user details
-    //TODO: check why this doesn't work anymore.
-    /* event.populate('creatorId').exec(function (err, event){
-        if (err) return handleError(err);
-    }); */
 });
 
 router.get('/api/users/:user_id/events', function(req, res, next){
@@ -210,10 +205,6 @@ router.delete('/api/users/:user_id/events/:event_id', function(req, res, next){
         }
         res.status(202).json({"event deleted": event});
     });
-
-    /* if (event.creatorId != req.params.user_id) {
-        return res.status(403).json({"message": "forbidden request"});
-    } */
 });
 
 module.exports = router;
