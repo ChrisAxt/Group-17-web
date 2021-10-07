@@ -19,7 +19,7 @@
                     <br>
                         <b-form-textarea id="textarea-auto-height" placeholder="Description" rows="3" max-rows="8" v-model="newClub.description"></b-form-textarea>
                     <br><br>
-                    <b-button class="CreateClub" v-on:click="createClub">Create</b-button>
+                    <b-button class="createClub" v-on:click="createClub">Create</b-button>
                 </b-col>
             <br>
             </b-container>
@@ -63,7 +63,7 @@ export default ({
           this.newClub.name = null
           this.newClub.tag = null
           this.newClub.description = null
-          this.$router.push('/Home')
+          this.$router.push('/clubs')
         })
     }
   }
