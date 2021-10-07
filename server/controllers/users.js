@@ -4,6 +4,7 @@ const { db } = require('../models/user');
 var router = express.Router();
 var User = require('../models/user');
 var Event = require('../models/event');
+var Club = require('../models/club');
 
 router.post('/api/users', function (req, res, next) {
     
@@ -57,6 +58,22 @@ router.delete('/api/users', function (req, res, next){
 router.get('/api/users/:id', function (req, res, next){
     
     User.findById({_id: req.params.id}, function(err, user){
+        if (err) { 
+            res.status(500).json({"message": "get failed"}); 
+            return next(err);
+        }
+        if (user == null) {
+            res.status(404).json({"message": "user not found"});
+        }
+        res.status(200).json(user);
+    });
+
+});
+
+//Get via specific universityId (unique)
+router.get('/api/users/:universityId', function (req, res, next){
+    
+    User.findOne({universityId: req.params.university_id}, function(err, user){
         if (err) { 
             res.status(500).json({"message": "get failed"}); 
             return next(err);
@@ -153,8 +170,63 @@ router.delete('/api/users/:id', function(req, res, next) {
     });
 });
 
-//Below: relationship requests
-router.post('/api/users/:user_id/events', function(req, res, next) {
+//Below: relationship requests user-club (1:N)
+router.post('/api/users/:user_id/clubs', function(req, res, next) {
+
+    var club = new Club(req.body);
+    club.ownerId = req.params.user_id;
+    club.participantIds.push(club.ownerId); 
+    
+    club.save(function (err) {
+        if (err) { 
+            res.status(400).json({"message": "post failed"});
+            return next(err);
+        }
+        res.status(201).json({"club created": club});
+    });
+});
+
+router.get('/api/users/:user_id/clubs', function(req, res, next){
+
+    Club
+    .find({ownerId: req.params.user_id})
+    .exec(function (err, clubs){
+        if (err) { 
+            res.status(500).json({"message": "get failed"});
+            return next(err); }
+        res.status(200).json({"clubs": clubs});
+    });
+});
+
+router.get('/api/users/:user_id/club/:club_id', function(req, res, next){
+
+    Club.findOne({_id: req.params.club_id, ownerId: req.params.user_id}, function(err, club){
+        if (err) {
+            res.status(500).json({"message": "get failed"});
+            return next(err); }
+        if (club == null) {
+            return res.status(404).json({"message": "club not found"});
+        }
+        res.status(200).json({"club": club});
+    });
+});
+
+router.delete('/api/users/:user_id/clubs/:club_id', function(req, res, next){
+
+    Club.findOneAndDelete({_id: req.params.club_id, ownerId: req.params.user_id}, function(err, club){
+        if (err) {
+            res.status(500).json({"message": "delete failed"});
+            return next(err);
+        }
+        if (club == null) {
+            return res.status(404).json({"message": "club not found"});
+        }
+        res.status(202).json({"club deleted": club});
+    });
+});
+
+//Below: relationship requests user-event (1:N) - NOT USABLE DUE TO PROJECT STRUCTURE
+/* router.post('/api/users/:user_id/events', function(req, res, next) {
 
     var event = new Event(req.body);
     event.creatorId = req.params.user_id; 
@@ -205,7 +277,7 @@ router.delete('/api/users/:user_id/events/:event_id', function(req, res, next){
         }
         res.status(202).json({"event deleted": event});
     });
-});
+}); */
 
 module.exports = router;
 
