@@ -1,9 +1,10 @@
 <template>
 <div>
   <b-card
-    title="Card Title"
+    v-on:click ="$emit('addCard')"
+    title= {newClub.name}
     img-src="https://picsum.photos/600/300/?image=25"
-    img-alt="Image"
+    img-alt= {newClub.image}
     img-top
     tag="article"
     style="max-width: 20rem;"
@@ -17,3 +18,14 @@
   </b-card>
 </div>
 </template>
+<script>
+// @ is an alias to /src
+// import { Api } from '@/Api'
+// import CreateClub from '@/view/CreateClub.vue'
+
+/* export default {
+  name: 'create-card',
+  props: ['newClub']
+} */
+
+</script>

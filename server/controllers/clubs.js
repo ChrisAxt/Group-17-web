@@ -5,10 +5,10 @@ var Club = require('../models/club');
 
 router.post('/api/clubs', function (req, res, next) {
     
-    var Club = new Club(req.body);
-    Club.save(function (err) {
+    var club = new Club(req.body);
+    club.save(function (err, club) {
         if (err) { return next(err); }
-        res.status(201).json(Club);
+        res.status(201).json(club);
     });
 });
 

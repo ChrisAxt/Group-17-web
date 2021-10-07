@@ -10,7 +10,7 @@
           <nav class="mb-3">
             <b-nav vertical>
               <b-nav-item active @click="hide">Active</b-nav-item>
-              <b-nav-item href="#link-1" @click="hide">Create Club</b-nav-item>
+              <b-nav-item href="http://localhost:8080/CreateClub" @click="hide">Create Club</b-nav-item>
               <b-nav-item href="#link-2" @click="hide">Create Event</b-nav-item>
             </b-nav>
           </nav>

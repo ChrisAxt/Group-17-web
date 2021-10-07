@@ -8,6 +8,7 @@ import Clubs from './views/Clubs.vue'
 import Events from './views/Events.vue'
 import Schedule from './views/Schedule.vue'
 import Profile from './views/Profile.vue'
+import CreateClub from './views/CreateClub.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -32,7 +33,7 @@ export default new Router({
     },
     {
       path: '/Home',
-      name: 'Home',
+      name: 'home',
       component: Home
     },
     {
@@ -55,6 +56,11 @@ export default new Router({
       path: '/Profile',
       name: 'profile',
       component: Profile
+    },
+    {
+      path: '/CreateClub',
+      name: 'createClub',
+      component: CreateClub
     }
   ]
 })

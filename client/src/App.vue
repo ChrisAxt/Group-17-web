@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-import MyFooter from './components/myFooter.vue'
+import MyFooter from '@/components/MyFooter.vue'
 
 export default {
   components: {

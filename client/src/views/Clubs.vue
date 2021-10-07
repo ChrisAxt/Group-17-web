@@ -11,8 +11,8 @@
 <br>
   <b-row align-h="start">
     <b-col cols="4"><clubs-object/></b-col>
-    <b-col cols="4"><clubs-object/></b-col>
-    <b-col cols="4"><clubs-object/></b-col>
+    <create-card v-bind:newClub = "newClub" v-on:addCard = "createCard"/>
+
   </b-row>
 
   <br>
