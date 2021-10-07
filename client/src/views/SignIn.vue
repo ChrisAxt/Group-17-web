@@ -43,11 +43,15 @@ export default {
   },
   methods: {
     SignIn() {
-      Api.get(`/users/filter/universityId/${this.universityId}`)
+      Api.get(`/users/uniId/${this.universityId}`)
         .then(response => {
           this.user = response.data
-          console.log(this.user.universityId)
-          alert('Hello ' + response.data.universityId)
+          if (this.user != null) {
+            alert('Found user:' + JSON.stringify(this.user, null, 2))
+            this.$router.push({ name: 'profile', params: { universityId: this.user.universityId } })
+          } else {
+            alert('User not found!')
+          }
           this.universityId = null
         })
         .catch(error => {
