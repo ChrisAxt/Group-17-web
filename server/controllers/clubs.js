@@ -6,7 +6,7 @@ var Club = require('../models/club');
 router.post('/api/clubs', function (req, res, next) {
     
     var club = new Club(req.body);
-    Club.save(function (err) {
+    club.save(function (err) {
         if (err) { 
             res.status(400).json({"message": "post failed"});
             return next(err);
