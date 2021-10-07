@@ -73,7 +73,7 @@ router.get('/api/users/:id', function (req, res, next){
 //Get via specific universityId (unique)
 router.get('/api/users/:universityId', function (req, res, next){
     
-    User.findOne({universityId: req.params.university_id}, function(err, user){
+    User.findOne({universityId: req.params.universityId}, function(err, user){
         if (err) { 
             res.status(500).json({"message": "get failed"}); 
             return next(err);
