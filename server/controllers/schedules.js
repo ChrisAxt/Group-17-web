@@ -33,9 +33,9 @@ router.get('/api/schedules/:id', function (req, res, next){
     
     var id = req.params.id;
      
-    Schedule.find({_id: id}, function(err, schedule){
+    Schedule.findById(id, function(err, schedule){
         if (err) { return next(err); }
-        if (schedule == null) {
+        if (schedule === null) {
             return res.status(404).json({"message": "Schedule not found"});
         }
         

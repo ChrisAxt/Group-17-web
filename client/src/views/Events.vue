@@ -3,18 +3,29 @@
         <div>
             <main-navbar/>
             <clubs-sidebar/>
-            <br>
+            <br><br><br>
             <b-container>
                 <b-col></b-col>
                 <b-col>
-                    <br><br>
-                    <h1 text-align="center">Today</h1>
+                    <h1 text-align="center">All Events</h1>
                     <br>
                     <events-object/>
-                    <br><br>
+                    <events-object/>
+                    <events-object/>
+                    <events-object/>
+                    <events-object/>
+                    <events-object/>
+                    <events-object/>
+                    <events-object/>
+                    <events-object/>
+                    <events-object/>
+                    <events-object/>
+                    <events-object/>
+                    <events-object/>
                 </b-col>
-            <br>
+                <b-col></b-col>
             </b-container>
+            <br><br><br><br>
         </div>
 
     </body>
