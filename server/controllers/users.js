@@ -183,7 +183,7 @@ router.post('/api/users/:user_id/clubs', function(req, res, next) {
             res.status(400).json({"message": "post failed"});
             return next(err);
         }
-        res.status(201).json({"club created": club});
+        res.status(201).json(club);
     });
 });
 
@@ -199,7 +199,7 @@ router.get('/api/users/:user_id/clubs', function(req, res, next){
     });
 });
 
-router.get('/api/users/:user_id/club/:club_id', function(req, res, next){
+router.get('/api/users/:user_id/clubs/:club_id', function(req, res, next){
 
     Club.findOne({_id: req.params.club_id, ownerId: req.params.user_id}, function(err, club){
         if (err) {
