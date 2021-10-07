@@ -29,7 +29,6 @@
   </b-row>
 
 </b-container>
-
   </body>
 </template>
 <script>
@@ -49,10 +48,16 @@ export default {
   },
   methods: {
     SignUp() {
-      Api.post('/users', this.newUser)
-        .catch(error => {
-          this.message = error
-        })
+      if (this.newUser.universityId === '' || this.newUser.name === '' || this.newUser.password === '') {
+        alert('Failure! All fields must be filled in!')
+      } else {
+        Api.post('/users', this.newUser)
+        alert(JSON.stringify(this.newUser, null, 2))
+        this.$router.push({ name: 'Home', params: { user: this.newUser } })
+          .catch(error => {
+            this.message = error
+          })
+      }
     }
   }
 }
@@ -61,6 +66,7 @@ export default {
 <div>
 </div>
 <style scoped>
+
 h1 {text-align: center;}
 h3 {text-align: center;}
 p {text-align: center;}
@@ -89,4 +95,5 @@ img {
     width: 25%;
     height: auto;
 }
+
 </style>

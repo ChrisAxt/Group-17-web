@@ -11,13 +11,13 @@
   <b-row>
     <b-col></b-col>
     <b-col>
-            <b-form-input placeholder="University ID" list="input-list" id="input-with-list"></b-form-input>
+            <b-form-input placeholder="University ID" list="input-list" id="input-with-list" v-model="universityId"></b-form-input>
             <br>
             <b-form-input placeholder="Password" list="input-list" id="input-with-list"></b-form-input>
             <div class="Sign-up-Button" style="text-align:center">
                 <br>
                 <router-link to="/SignUp"><b-button style="margin-left:0px;" variant="signUp">Sign Up</b-button></router-link>
-                <b-button style="margin-left:10%;" variant="signIn">Sign In</b-button>
+                <b-button style="margin-left:10%;" v-on:click="SignIn" variant="signIn">Sign In</b-button>
                 <br><br><br><br><br><br><br>
             </div>
     </b-col>
@@ -29,6 +29,34 @@
 
     </body>
 </template>
+<script>
+
+import { Api } from '@/Api'
+
+export default {
+  name: 'home',
+  data() {
+    return {
+      universityId: '',
+      user: {}
+    }
+  },
+  methods: {
+    SignIn() {
+      Api.get(`/users/filter/universityId/${this.universityId}`)
+        .then(response => {
+          this.user = response.data
+          console.log(this.user.universityId)
+          alert('Hello ' + response.data.universityId)
+          this.universityId = null
+        })
+        .catch(error => {
+          this.message = error
+        })
+    }
+  }
+}
+</script>
 
 <style scoped>
 h1 {text-align: center;}
