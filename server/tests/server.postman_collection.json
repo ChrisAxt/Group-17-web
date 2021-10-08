@@ -627,26 +627,17 @@
 									"pm.environment.set(\"event_isPublic\", eventIsPublic);\r",
 									"var getEventIsPublic = pm.variables.get(\"event_isPublic\");\r",
 									"\r",
-									"var eventScheduleId = jsonData.scheduleId;\r",
-									"pm.environment.set(\"event_scheduleId\", eventScheduleId);\r",
-									"var getEventScheduleId = pm.variables.get(\"event_scheduleId\");\r",
+									"var eventLocation = jsonData.location;\r",
+									"pm.environment.set(\"event_location\", eventLocation);\r",
+									"var getEventLocation = pm.variables.get(\"event_location\");\r",
 									"\r",
-									"var eventClubId = jsonData.clubId;\r",
-									"pm.environment.set(\"event_clubId\", eventClubId);\r",
-									"var getEventClubId = pm.variables.get(\"event_clubId\");\r",
-									"\r",
-									"var eventCreatorId = jsonData.creatorId;\r",
-									"pm.environment.set(\"event_creatorId\", eventCreatorId);\r",
-									"var getEventCreatorId = pm.variables.get(\"event_creatorId\");\r",
-									"\r",
-									"var eventAttendeeIds = jsonData.attendeeIds;\r",
-									"pm.environment.set(\"event_attendeeIds\", eventAttendeeIds);\r",
-									"var getEventAttendeeIds = pm.variables.get(\"event_attendeeIds\");\r",
+									"var eventDate = jsonData.date;\r",
+									"pm.environment.set(\"event_date\", eventDate);\r",
+									"var getEventDate = pm.variables.get(\"event_date\");\r",
 									"\r",
 									"pm.test(\"Staus code is 201\", function(){\r",
 									"    pm.response.to.have.status(201);\r",
-									"})\r",
-									";"
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -668,7 +659,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"event name example\",\r\n    \"description\": \"event description example\",\r\n    \"isPublic\": true,\r\n    \"attendeeIds\": []\r\n    }"
+							"raw": "{\r\n    \"name\": \"event name example\",\r\n    \"description\": \"event description example\",\r\n    \"isPublic\": true,\r\n    \"location\": \"patricia\",\r\n    \"date\": \"2021-12-31\"\r\n    }"
 						},
 						"url": {
 							"raw": "{{host}}/api/events",
@@ -758,8 +749,8 @@
 									"var getEventId = pm.variables.get(\"event_id\");\r",
 									"\r",
 									"var eventName = jsonData.name;\r",
-									"pm.environment.set(\"name\", eventName);\r",
-									"var getEventName = pm.variables.get(\"name\");\r",
+									"pm.environment.set(\"event_name\", eventName);\r",
+									"var getEventName = pm.variables.get(\"event_name\");\r",
 									"\r",
 									"var eventDescription = jsonData.description;\r",
 									"pm.environment.set(\"event_description\", eventDescription);\r",
@@ -769,26 +760,17 @@
 									"pm.environment.set(\"event_isPublic\", eventIsPublic);\r",
 									"var getEventIsPublic = pm.variables.get(\"event_isPublic\");\r",
 									"\r",
-									"var eventScheduleId = jsonData.scheduleId;\r",
-									"pm.environment.set(\"event_scheduleId\", eventScheduleId);\r",
-									"var getEventScheduleId = pm.variables.get(\"event_scheduleId\");\r",
+									"var eventLocation = jsonData.location;\r",
+									"pm.environment.set(\"event_location\", eventLocation);\r",
+									"var getEventLocation = pm.variables.get(\"event_location\");\r",
 									"\r",
-									"var eventClubId = jsonData.clubId;\r",
-									"pm.environment.set(\"event_clubId\", eventClubId);\r",
-									"var getEventClubId = pm.variables.get(\"event_clubId\");\r",
-									"\r",
-									"var eventCreatorId = jsonData.creatorId;\r",
-									"pm.environment.set(\"event_creatorId\", eventCreatorId);\r",
-									"var getEventCreatorId = pm.variables.get(\"event_creatorId\");\r",
-									"\r",
-									"var eventAttendeeIds = jsonData.attendeeIds;\r",
-									"pm.environment.set(\"event_attendeeIds\", eventAttendeeIds);\r",
-									"var getEventAttendeeIds = pm.variables.get(\"event_attendeeIds\");\r",
+									"var eventDate = jsonData.date;\r",
+									"pm.environment.set(\"event_date\", eventDate);\r",
+									"var getEventDate = pm.variables.get(\"event_date\");\r",
 									"\r",
 									"pm.test(\"Staus code is 201\", function(){\r",
 									"    pm.response.to.have.status(201);\r",
-									"})\r",
-									";"
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -810,7 +792,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"nameInsert\",\r\n    \"description\": \"everybody... yeaaaaaah\",\r\n    \"isPublic\": true,\r\n    \"attendeeIds\": []\r\n    }"
+							"raw": "{\r\n    \"name\": \"event name example\",\r\n    \"description\": \"event description example\",\r\n    \"isPublic\": true,\r\n    \"location\": \"patricia\",\r\n    \"date\": \"2021-12-31\"\r\n    }"
 						},
 						"url": {
 							"raw": "{{host}}/api/events",
@@ -939,29 +921,17 @@
 									"pm.environment.set(\"event_isPublic\", eventIsPublic);\r",
 									"var getEventIsPublic = pm.variables.get(\"event_isPublic\");\r",
 									"\r",
-									"var eventScheduleId = jsonData.scheduleId;\r",
-									"pm.environment.set(\"event_scheduleId\", eventScheduleId);\r",
-									"var getEventScheduleId = pm.variables.get(\"event_scheduleId\");\r",
+									"var eventLocation = jsonData.location;\r",
+									"pm.environment.set(\"event_location\", eventLocation);\r",
+									"var getEventLocation = pm.variables.get(\"event_location\");\r",
 									"\r",
-									"var eventClubId = jsonData.clubId;\r",
-									"pm.environment.set(\"event_clubId\", eventClubId);\r",
-									"var getEventClubId = pm.variables.get(\"event_clubId\");\r",
+									"var eventDate = jsonData.date;\r",
+									"pm.environment.set(\"event_date\", eventDate);\r",
+									"var getEventDate = pm.variables.get(\"event_date\");\r",
 									"\r",
-									"var eventCreatorId = jsonData.creatorId;\r",
-									"pm.environment.set(\"event_creatorId\", eventCreatorId);\r",
-									"var getEventCreatorId = pm.variables.get(\"event_creatorId\");\r",
-									"\r",
-									"var eventAttendeeIds = jsonData.attendeeIds;\r",
-									"pm.environment.set(\"event_attendeeIds\", eventAttendeeIds);\r",
-									"var getEventAttendeeIds = pm.variables.get(\"event_attendeeIds\");\r",
-									"\r",
-									"pm.test(\"Update successful\", function () {\r",
-									"    pm.expect(jsonData.name).to.eql(pm.variables.get(\"event_name\"));\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Status code is 200\", function(){\r",
-									"    pm.response.to.have.status(200);\r",
-									"})"
+									"pm.test(\"Staus code is 201\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -978,7 +948,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"event name patch update\",\r\n    \"description\": \"event description patch update\",\r\n    \"isPublic\": false,\r\n    \"attendeeIds\": []\r\n    }",
+							"raw": "{\r\n    \"name\": \"event name patch update\",\r\n    \"description\": \"event description patch update\",\r\n    \"isPublic\": \"false\",\r\n    \"location\": \"jupiter\",\r\n    \"date\": \"2021-12-11\"\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
