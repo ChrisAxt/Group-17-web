@@ -6,7 +6,7 @@ var Announcement = require('../models/announcement');
 router.post('/api/announcements', function (req, res, next) {
     
     var announcement = new Announcement(req.body);
-    Announcement.save(function (err) {
+    announcement.save(function (err) {
         if (err) { 
             res.status(400).json({"message": "post failed"});
             return next(err);
