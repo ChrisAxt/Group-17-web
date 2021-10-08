@@ -6,7 +6,7 @@ var cors = require('cors');
 var history = require('connect-history-api-fallback');
 
 var usersController = require('./controllers/users');
-var schedulesController = require('./controllers/schedules');
+var announcementsController = require('./controllers/announcements');
 var eventsController = require('./controllers/events');
 var clubsController = require('./controllers/clubs');
 
@@ -42,7 +42,7 @@ app.get('/api', function(req, res) {
 
 app.use(usersController);
 
-app.use(schedulesController);
+app.use(announcementsController);
 
 app.use(eventsController);
 
