@@ -4,13 +4,14 @@
             <main-navbar/>
             <clubs-sidebar/>
         </div>
-        <br><br>
+        <br>
+        <b-button v-on:click="deleteClub">Delete all Clubs</b-button>
+        <br>
         <b-container class="bv-example-row">
 
 <h1 text-align="center">Clubs</h1>
 <br>
   <b-row align-h="start">
-    <b-col cols="4"><clubs-object/></b-col>
     <b-col v-for="club in clubs" v-bind:key="club" cols="12" sm="6" md="4">
             <clubs-object v-bind:club="club"/>
     </b-col>
@@ -69,6 +70,17 @@ export default ({
       .then(() => {
         console.log('This runs every time after success or error.')
       })
+  },
+
+  methods: {
+    deleteClub() {
+      console.log('Delete all clubs')
+      Api.delete('/clubs')
+        .then(response => {
+          console.log(response)
+          this.clubs = response.data.clubs
+        })
+    }
   },
   data() {
     return {
