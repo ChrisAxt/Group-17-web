@@ -929,8 +929,8 @@
 									"pm.environment.set(\"event_date\", eventDate);\r",
 									"var getEventDate = pm.variables.get(\"event_date\");\r",
 									"\r",
-									"pm.test(\"Staus code is 201\", function(){\r",
-									"    pm.response.to.have.status(201);\r",
+									"pm.test(\"Staus code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
 									"});"
 								],
 								"type": "text/javascript"
