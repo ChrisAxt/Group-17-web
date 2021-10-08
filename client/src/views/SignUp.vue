@@ -53,7 +53,13 @@ export default {
       } else {
         Api.post('/users', this.newUser)
         alert(JSON.stringify(this.newUser, null, 2))
-        this.$router.push({ name: 'Home', params: { user: this.newUser } })
+        Api.get(`/users/uniId/${this.newUser.universityId}`)
+          .then(response => {
+            this.user = response.data
+            if (this.user != null) {
+              this.$router.push({ name: 'profile', params: { currentUser: this.user } })
+            }
+          })
           .catch(error => {
             this.message = error
           })

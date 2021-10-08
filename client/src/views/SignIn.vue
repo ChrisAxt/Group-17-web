@@ -48,7 +48,7 @@ export default {
           this.user = response.data
           if (this.user != null) {
             alert('Found user:' + JSON.stringify(this.user, null, 2))
-            this.$router.push({ name: 'profile', params: { universityId: this.user.universityId } })
+            this.$router.push({ name: 'profile', params: { currentUser: this.user } })
           } else {
             alert('User not found!')
           }
