@@ -56,11 +56,6 @@ router.delete('/api/events', function (req, res, next){
             return res.status(202).json({"deleted events": events});
         });
     });
-
-    /* Event.deleteMany(function(err, events){
-        if (err) { return next(err); }
-        return res.status(202).json({"deleted events": events});
-    }); */
 });
 
 router.get('/api/events/:id', function (req, res, next){
