@@ -100,10 +100,13 @@ router.put('/api/events/:id', function(req, res, next) {
         }
         event.event_id = req.body.event_id;
         event.name = req.body.name;
-        event.attendeeIds = req.body.attendeeIds;
         event.description = req.body.description;
-        event.clubIds = req.body.clubIds;
-        event.scheduleId = req.body.scheduleId;
+        event.isPublic = req.body.isPublic;
+        event.location = req.body.location;
+        event.date = req.body.date;
+        event.clubId = req.body.clubId;
+        event.creatorId = req.body.creatorId;
+        event.attendeeIds = req.body.attendeeIds;
         event.save();
         res.status(200).json({"event updated via put": event});
     });

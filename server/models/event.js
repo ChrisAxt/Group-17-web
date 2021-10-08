@@ -7,8 +7,9 @@ var eventSchema = new Schema({
     name: {type: String, required: 'Event name is required'},
     description: {type: String},
     isPublic: {type: Boolean},
+    location: {type: String},
+    date: {type: Date},
     //Relationship attributes
-    scheduleId: {type: Schema.Types.ObjectId, ref: 'Schedule'},
     clubId: {type: Schema.Types.ObjectId, ref: 'Club'},
     creatorId: {type: Schema.Types.ObjectId, ref: 'User'},
     attendeeIds: {type: Array}
