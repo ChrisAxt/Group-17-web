@@ -410,7 +410,7 @@
 					"response": []
 				},
 				{
-					"name": "PATCH /api/users/id",
+					"name": "PATCH /api/users/universityId",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -479,14 +479,14 @@
 							"raw": "{\n    \"universityId\": \"1\",\n    \"name\": \"Carl\",\n    \"password\": \"password\",\n    \"clubIds\": [],\n    \"eventIds\": []\n}\n"
 						},
 						"url": {
-							"raw": "{{host}}/api/users/{{user_id}}",
+							"raw": "{{host}}/api/users/{{user_universityId}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"{{user_id}}"
+								"{{user_universityId}}"
 							]
 						}
 					},

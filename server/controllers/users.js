@@ -142,9 +142,10 @@ router.put('/api/users/:id', function(req, res, next) {
     });
 });
 
-router.patch('/api/users/:id', function(req, res, next) {
+//Patch is using the user's university id instead of object id
+router.patch('/api/users/:universityId', function(req, res, next) {
     
-    User.findById({_id: req.params.id}, function(err, user) {
+    User.findOne({universityId: req.params.universityId}, function(err, user) {
         if (err) { 
             res.status(500).json({"message": "patch failed"});
             return next(err); }
