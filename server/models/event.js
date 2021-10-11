@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 //TODO: decide whether we are using the generatedID or our own 
 
 var eventSchema = new Schema({
-    name: {type: String, required: 'Event name is required'},
+    name: {type: String, unique: true, required: 'Event name is required'},
     description: {type: String},
     isPublic: {type: Boolean},
     location: {type: String},
