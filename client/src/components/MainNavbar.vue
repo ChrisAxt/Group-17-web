@@ -8,7 +8,6 @@
     <router-link to="/Profile"><b-navbar-brand>Profile</b-navbar-brand></router-link>
     <router-link to="/Clubs"><b-navbar-brand v-b-toggle.sidebar-no-header>Clubs</b-navbar-brand></router-link>
     <router-link to="/Events"><b-navbar-brand>Events</b-navbar-brand></router-link>
-    <router-link to="/Schedule"><b-navbar-brand>Schedule</b-navbar-brand></router-link>
     <router-link to="/Announcements"><b-navbar-brand>Announcements</b-navbar-brand></router-link>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>

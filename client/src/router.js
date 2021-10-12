@@ -6,7 +6,6 @@ import SignUp from './views/SignUp.vue'
 import Home from './views/Home.vue'
 import Clubs from './views/Clubs.vue'
 import Events from './views/Events.vue'
-import Schedule from './views/Schedule.vue'
 import Profile from './views/Profile.vue'
 import CreateClub from './views/CreateClub.vue'
 import Announcements from './views/Announcements.vue'
@@ -47,11 +46,6 @@ export default new Router({
       path: '/Events',
       name: 'events',
       component: Events
-    },
-    {
-      path: '/Schedule',
-      name: 'schedule',
-      component: Schedule
     },
     {
       path: '/Profile',
