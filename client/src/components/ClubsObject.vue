@@ -1,20 +1,21 @@
 <template>
 <div>
   <b-card
-    v-on:click ="$emit('addCard')"
-    title= {newClub.name}
+    title= hej
     img-src="https://picsum.photos/600/300/?image=25"
-    img-alt= {newClub.image}
+    img-alt=
     img-top
     tag="article"
     style="max-width: 20rem;"
     class="mb-2"
   >
+  <template>
+    <h4>{{$route.params.currentClub.name}}</h4>
+  </template>
     <b-card-text>
       Some quick example text to build on the card title and make up the bulk of the card's content.
     </b-card-text>
-
-    <b-button href="#" variant="primary">Go somewhere</b-button>
+    <b-dropdown href="#" variant="primary">Go somewhere</b-dropdown>
   </b-card>
 </div>
 </template>

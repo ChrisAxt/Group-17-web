@@ -5,7 +5,6 @@
             <clubs-sidebar/>
         </div>
         <br>
-        <b-button v-on:click="deleteClub">Delete all Clubs</b-button>
         <br>
         <b-container class="bv-example-row">
 
@@ -21,7 +20,9 @@
   <br>
 
   <b-row align-h="center">
-    <b-col cols="4"></b-col>
+    <b-col cols="4">
+      <b-button v-on:click="deleteClub">Delete all Clubs</b-button>
+    </b-col>
   </b-row>
 
   <br>

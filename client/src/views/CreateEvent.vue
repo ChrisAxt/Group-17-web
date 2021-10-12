@@ -25,11 +25,49 @@
     </body>
 </template>
 <script>
+import { Api } from '@/Api'
 import ClubsSidebar from '@/components/ClubsSidebar.vue'
 import MainNavbar from '@/components/MainNavbar.vue'
 import SelectType from '@/components/SelectType.vue'
 import UploadImage from '@/components/UploadImage.vue'
 // import EventsObject from '@/components/EventsObject.vue'
 
-export default ({ components: { ClubsSidebar, MainNavbar, SelectType, UploadImage/*, EventsObject */ } })
+export default ({
+  name: 'events',
+  components: { ClubsSidebar, MainNavbar, SelectType, UploadImage/*, EventsObject */ },
+
+  data() {
+    return {
+      newEvent: {
+        name: '',
+        description: '',
+        isPublic: '',
+        location: '',
+        date: ''
+      },
+      selected: null,
+      options: [
+        { value: null, text: 'Please select an option' },
+        { value: 'a', text: 'Social' },
+        { value: 'b', text: 'Secret' },
+        { value: 'b', text: 'Lecture' },
+        { value: { C: '3PO' }, text: 'This is an option with object value' }
+        // { value: 'd', text: 'This one is disabled', disabled: true }
+      ]
+    }
+  },
+  methods: {
+    createClub() {
+      Api.post('/events', this.newEvent)
+        .then(response => {
+          alert('The ' + response.data.name + ' Event has been created.')
+          this.newEvent.name = null
+          this.newEvent.tag = null
+          this.newEvent.description = null
+          this.$router.push({ name: 'events', params: { currentEvent: this.newEvent } })
+        })
+    }
+  }
+
+})
 </script>

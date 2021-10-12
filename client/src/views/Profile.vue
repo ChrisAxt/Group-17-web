@@ -3,7 +3,7 @@
         <div>
             <main-navbar/>
             <clubs-sidebar/>
-            <ProfileObject/>
+            <profile-object/>
         </div>
 
     </body>

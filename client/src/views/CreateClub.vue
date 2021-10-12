@@ -36,6 +36,7 @@ import UploadImage from '@/components/UploadImage.vue'
 // import EventsObject from '@/components/EventsObject.vue'
 
 export default ({
+  name: 'clubs',
   components: { ClubsSidebar, MainNavbar, UploadImage/*, EventsObject */ },
   data() {
     return {
@@ -63,7 +64,7 @@ export default ({
           this.newClub.name = null
           this.newClub.tag = null
           this.newClub.description = null
-          this.$router.push('/clubs')
+          this.$router.push({ name: 'clubs', params: { currentClub: this.newClub } })
         })
     }
   }
