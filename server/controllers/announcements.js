@@ -77,6 +77,21 @@ router.delete('/api/announcements/:id', function(req, res, next) {
     });
 });
 
-//put and patch
+router.put('/api/announcements/:id', function(req, res, next) {
+
+    Announcement.findById({_id: req.params.id}, function(err, announcement) {
+        if (err) { 
+            res.status(500).json({"message": "put failed"});
+            return next(err); }
+        if (announcement == null) {
+            return res.status(404).json({"message": "announcement not found"});
+        }
+        announcement.announcement_id = req.body.announcement_id;
+        announcement.title = req.body.title;
+        announcement.body = req.body.body;
+        announcement.save();
+        res.status(200).json({"announcement updated via put": announcement});
+    });
+});
 
 module.exports = router;

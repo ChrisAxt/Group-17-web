@@ -7,7 +7,7 @@
       <router-link to="/Home">Home</router-link> |
       <router-link to="/Clubs">Clubs</router-link> |
       <router-link to="/Events">Events</router-link> |
-      <router-link to="/Schedule">Schedule</router-link> |
+      <router-link to="/Announcements">Announcements</router-link> |
       <router-link to="/Profile">Profile</router-link>
     </div>
     <!-- Render the content of the current page view -->
