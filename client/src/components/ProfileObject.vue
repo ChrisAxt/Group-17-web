@@ -10,40 +10,92 @@
                     <h4 class="text-right">Profile</h4>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">Student ID</label><h1>{{$route.params.currentUser.universityId}}</h1></div>
-                    <div class="col-md-6"><label class="labels">Name</label><h1>{{$route.params.currentUser.name}}</h1></div>
+                    <div class="col-md-6">
+                        <label class="labels">Student ID </label><h1>{{ this.$route.params.currentUser.universityId }}</h1>
+                    </div>
+                    <div class="col-md-6"><label class="labels">Name</label><h1>{{ this.$route.params.currentUser.name }}</h1></div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12"><label class="labels">Education</label><h4>Software Engineering and Management</h4></div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-6"><label class="labels">Program</label><h4>Master</h4></div>
-                    <div class="col-md-6"><label class="labels">Year</label><h4>Second Year</h4></div>
+                    <div class="col-md-6"><label class="labels">Program</label><h4>Bachelors</h4></div>
+                    <div class="col-md-6"><label class="labels">Year</label><h4>2023</h4></div>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center experience"><span>Clubs</span></div><br>
+            <h4 class="text-left">Edit</h4>
+            <br>
+            <b-form-input placeholder="University ID" list="input-list" id="input-with-list" v-model="updatedUser.universityId"></b-form-input>
+            <br>
+            <b-form-input placeholder="Name" list="input-list" id="input-with-list" v-model="updatedUser.name"></b-form-input>
+            <br>
+            <b-form-input placeholder="Password" list="input-list" id="input-with-list" v-model="updatedUser.password"></b-form-input>
+
                 <div class="col-md-12">
                     <b-container class="bv-example-row">
                     <b-row align-h="end">
                         <b-col cols="4"><events-object/></b-col>
                     </b-row>
                     </b-container>
-                </div> <br>
+                </div>
                 <div class="col-md-12"></div>
+            </div>
+            <div class="Edit-Button">
+                <b-button style="margin-left:15px;" v-on:click="Save" variant="edit">Save</b-button>
             </div>
         </div>
     </div>
 </div>
 </template>
+<script>
 
+import { Api } from '@/Api'
+
+export default {
+  name: 'User',
+  props: {
+    UniId: {
+      type: String
+    },
+    Name: {
+      type: String
+    }
+  },
+  data() {
+    return {
+      updatedUser: {
+        name: '',
+        password: ''
+      }
+    }
+  },
+  methods: {
+    Save() {
+      this.universityId = this.$route.params.currentUser.universityId
+      Api.patch(`/users/${this.universityId}`, this.updatedUser)
+      alert('User: "' + this.universityId + '" was successfully updated!')
+        .catch(error => {
+          this.message = error
+        })
+    }
+  }
+}
+</script>
 <style>
 body {
     background: rgb(99, 39, 120)
 }
+button {
+    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    transition-duration: 0.4s;
+    background-color:rgb(7, 7, 7);
+    border-radius: 8px;
+    width: 91%;
 
+}
 .form-control:focus {
     box-shadow: none;
     border-color: #BA68C8
