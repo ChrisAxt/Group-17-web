@@ -1,7 +1,5 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-
-//TODO: decide whether we are using the generatedID or our own 
+var Schema = mongoose.Schema; 
 
 var eventSchema = new Schema({
     name: {type: String, unique: true, required: 'Event name is required'},
@@ -10,9 +8,7 @@ var eventSchema = new Schema({
     location: {type: String},
     date: {type: Date},
     //Relationship attributes
-    clubId: {type: Schema.Types.ObjectId, ref: 'Club'},
-    creatorId: {type: Schema.Types.ObjectId, ref: 'User'},
-    attendeeIds: {type: Array}
+    creatorId: {type: Schema.Types.ObjectId, ref: 'User'}
 });
 
 module.exports = mongoose.model('event', eventSchema);
