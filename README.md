@@ -69,7 +69,7 @@ The purpose of this system is to provide students a simple and all-in-one platfo
 * Profile: displays user information (e.g., ID, profile picture)
 * Clubs: displays clubs information (e.g., Name, description)
 * Events: displays upcoming events
-* Schedule: shows all the events that are part of the user's schedule
+* Announcements: shows relevant updates about events or clubs
 
 ### Entity-Relationship (ER) Diagram
 
