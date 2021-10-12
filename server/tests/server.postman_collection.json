@@ -410,7 +410,7 @@
 					"response": []
 				},
 				{
-					"name": "PATCH /api/users/id",
+					"name": "PATCH /api/users/universityId",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -476,17 +476,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"universityId\": \"1\",\n    \"name\": \"Carl\",\n    \"password\": \"password\",\n    \"clubIds\": [],\n    \"eventIds\": []\n}\n"
+							"raw": "{\n    \"universityId\": \"1\",\n    \"name\": \"Giammy\",\n    \"password\": \"password\",\n    \"clubIds\": [],\n    \"eventIds\": []\n}\n"
 						},
 						"url": {
-							"raw": "{{host}}/api/users/{{user_id}}",
+							"raw": "{{host}}/api/users/{{user_universityId}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"{{user_id}}"
+								"{{user_universityId}}"
 							]
 						}
 					},
@@ -1192,6 +1192,328 @@
 			]
 		},
 		{
+			"name": "Announcement",
+			"item": [
+				{
+					"name": "POST /api/announcements",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"var announcementId = jsonData._id;\r",
+									"pm.environment.set(\"announcement_id\", announcementId);\r",
+									"var getAnnouncementId = pm.variables.get(\"announcement_id\");\r",
+									"\r",
+									"var announcementTitle = jsonData.title;\r",
+									"pm.environment.set(\"announcement_title\", announcementTitle);\r",
+									"var getAnnouncementTitle = pm.variables.get(\"announcement_title\");\r",
+									"\r",
+									"var announcementBody = jsonData.body;\r",
+									"pm.environment.set(\"announcement_body\", announcementBody);\r",
+									"var getAnnouncementBody = pm.variables.get(\"announcement_body\");\r",
+									"\r",
+									"pm.test(\"Staus code is 201\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"})\r",
+									";"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"important announcement\",\r\n    \"body\": \"something happened yesterday when I was grocery shopping...\"\r\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/announcements",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"announcements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /api/announcements/id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/announcements/{{announcement_id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"announcements",
+								"{{announcement_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /api/announcements",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"var announcementId = jsonData._id;\r",
+									"pm.environment.set(\"announcement_id\", announcementId);\r",
+									"var getAnnouncementId = pm.variables.get(\"announcement_id\");\r",
+									"\r",
+									"var announcementTitle = jsonData.title;\r",
+									"pm.environment.set(\"announcement_title\", announcementTitle);\r",
+									"var getAnnouncementTitle = pm.variables.get(\"announcement_title\");\r",
+									"\r",
+									"var announcementBody = jsonData.body;\r",
+									"pm.environment.set(\"announcement_body\", announcementBody);\r",
+									"var getAnnouncementBody = pm.variables.get(\"announcement_body\");\r",
+									"\r",
+									"pm.test(\"Staus code is 201\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"})\r",
+									";"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"important announcement\",\r\n    \"body\": \"something happened yesterday when I was grocery shopping...\"\r\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/announcements",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"announcements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /api/announcements",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Staus code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/announcements",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"announcements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /api/announcements/id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Staus code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/announcements/{{announcement_id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"announcements",
+								"{{announcement_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /api/announcements",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 202\", function(){\r",
+									"    pm.response.to.have.status(202);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/announcements",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"announcements"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Relationship user-club",
 			"item": [
 				{
@@ -1441,7 +1763,7 @@
 					"response": []
 				},
 				{
-					"name": "DELETE /api/users/user_id/events/event_id",
+					"name": "DELETE /api/users/user_id/clubs/club_id",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -1497,10 +1819,10 @@
 			]
 		},
 		{
-			"name": "Announcement",
+			"name": "Relationship user-event",
 			"item": [
 				{
-					"name": "POST /api/announcements",
+					"name": "POST /api/users for relationship",
 					"event": [
 						{
 							"listen": "test",
@@ -1508,22 +1830,35 @@
 								"exec": [
 									"var jsonData = pm.response.json();\r",
 									"\r",
-									"var announcementId = jsonData._id;\r",
-									"pm.environment.set(\"announcement_id\", announcementId);\r",
-									"var getAnnouncementId = pm.variables.get(\"announcement_id\");\r",
+									"var userId = jsonData._id;\r",
+									"pm.environment.set(\"user_id\", userId);\r",
+									"var getUserId = pm.variables.get(\"user_id\");\r",
 									"\r",
-									"var announcementTitle = jsonData.title;\r",
-									"pm.environment.set(\"announcement_title\", announcementTitle);\r",
-									"var getAnnouncementTitle = pm.variables.get(\"announcement_title\");\r",
+									"var universityId = jsonData.universityId;\r",
+									"pm.environment.set(\"user_universityId\", universityId);\r",
+									"var getUniversityId = pm.variables.get(\"user_universityId\");\r",
 									"\r",
-									"var announcementBody = jsonData.body;\r",
-									"pm.environment.set(\"announcement_body\", announcementBody);\r",
-									"var getAnnouncementBody = pm.variables.get(\"announcement_body\");\r",
+									"var userName = jsonData.name;\r",
+									"pm.environment.set(\"user_name\", userName);\r",
+									"var getUserName = pm.variables.get(\"user_name\");\r",
+									"\r",
+									"var userPassword = jsonData.password;\r",
+									"pm.environment.set(\"user_password\", userPassword);\r",
+									"var getUserName = pm.variables.get(\"user_password\");\r",
+									"\r",
+									"var userClubIds = jsonData.clubIds;\r",
+									"pm.environment.set(\"user_clubIds\", userClubIds);\r",
+									"var getUserClubIds = pm.variables.get(\"user_clubIds\");\r",
+									"\r",
+									"var userEventIds = jsonData.eventIds;\r",
+									"pm.environment.set(\"user_eventIds\", userEventIds);\r",
+									"var getUserEventIds = pm.variables.get(\"user_eventIds\");\r",
 									"\r",
 									"pm.test(\"Staus code is 201\", function(){\r",
 									"    pm.response.to.have.status(201);\r",
+									"\r",
 									"})\r",
-									";"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -1554,29 +1889,204 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"important announcement\",\r\n    \"body\": \"something happened yesterday when I was grocery shopping...\"\r\n}"
+							"raw": "    {\r\n        \"universityId\": \"gusiacgi\",\r\n        \"name\": \"user name example\",\r\n        \"password\": \"user password example\",\r\n        \"clubIds\":[],\r\n        \"eventIds\": []\r\n    }"
 						},
 						"url": {
-							"raw": "{{host}}/api/announcements",
+							"raw": "{{host}}/api/users",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
-								"announcements"
+								"users"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "DELETE /api/clubs Copy",
+					"name": "POST /api/users/user_id/events",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 202\", function(){\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"var eventId = jsonData._id;\r",
+									"pm.environment.set(\"event_id\", eventId);\r",
+									"var getEventId = pm.variables.get(\"event_id\");\r",
+									"\r",
+									"var eventName = jsonData.name;\r",
+									"pm.environment.set(\"event_name\", eventName);\r",
+									"var getEventName = pm.variables.get(\"event_name\");\r",
+									"\r",
+									"var eventDescription = jsonData.description;\r",
+									"pm.environment.set(\"event_description\", eventDescription);\r",
+									"var getEventDescription = pm.variables.get(\"event_description\");\r",
+									"\r",
+									"var eventIsPublic = jsonData.isPublic;\r",
+									"pm.environment.set(\"event_isPublic\", eventIsPublic);\r",
+									"var getEventIsPublic = pm.variables.get(\"event_isPublic\");\r",
+									"\r",
+									"var eventLocation = jsonData.location;\r",
+									"pm.environment.set(\"event_location\", eventLocation);\r",
+									"var getEventLocation = pm.variables.get(\"event_location\");\r",
+									"\r",
+									"var eventDate = jsonData.date;\r",
+									"pm.environment.set(\"event_date\", eventDate);\r",
+									"var getEventDate = pm.variables.get(\"event_date\");\r",
+									"\r",
+									"var eventCreatorId = jsonData.creatorId;\r",
+									"pm.environment.set(\"event_creatorId\", eventCreatorId);\r",
+									"var getEventCreatorId = pm.variables.get(\"event_creatorId\");\r",
+									"\r",
+									"pm.test(\"Staus code is 201\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"gimmy's event\",\r\n    \"description\": \"event description example\",\r\n    \"isPublic\": true,\r\n    \"location\": \"lindholmen\",\r\n    \"date\": \"2021-12-31\"\r\n    }"
+						},
+						"url": {
+							"raw": "{{host}}/api/users/{{user_id}}/events",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /api/users/user_id/events",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Staus code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/users/{{user_id}}/events",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /api/users/user_id/events/event_id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Staus code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/users/{{user_id}}/events/{{event_id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"events",
+								"{{event_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /api/users/user_id/events/event_id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Staus code is 202\", function(){\r",
 									"    pm.response.to.have.status(202);\r",
 									"})"
 								],
@@ -1591,20 +2101,24 @@
 								"key": "Accept",
 								"value": "application/json",
 								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
-							"raw": "{{host}}/api/announcements",
+							"raw": "{{host}}/api/users/{{user_id}}/events/{{event_id}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
-								"announcements"
+								"users",
+								"{{user_id}}",
+								"events",
+								"{{event_id}}"
 							]
 						}
 					},

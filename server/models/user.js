@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-    universityId: {type: String, required: 'University id is required'},
+    universityId: {type: String, unique: true, required: 'University id is required'},
     name: {type: String},
     password: {type: String, required: 'User password is required'},
     //Relationship attributes

@@ -142,9 +142,10 @@ router.put('/api/users/:id', function(req, res, next) {
     });
 });
 
-router.patch('/api/users/:id', function(req, res, next) {
+//Patch is using the user's university id instead of object id
+router.patch('/api/users/:universityId', function(req, res, next) {
     
-    User.findById({_id: req.params.id}, function(err, user) {
+    User.findOne({universityId: req.params.universityId}, function(err, user) {
         if (err) { 
             res.status(500).json({"message": "patch failed"});
             return next(err); }
@@ -226,8 +227,8 @@ router.delete('/api/users/:user_id/clubs/:club_id', function(req, res, next){
     });
 });
 
-//Below: relationship requests user-event (1:N) - NOT USABLE DUE TO PROJECT STRUCTURE
-/* router.post('/api/users/:user_id/events', function(req, res, next) {
+//Below: relationship requests user-event (1:N)
+router.post('/api/users/:user_id/events', function(req, res, next) {
 
     var event = new Event(req.body);
     event.creatorId = req.params.user_id; 
@@ -237,7 +238,7 @@ router.delete('/api/users/:user_id/clubs/:club_id', function(req, res, next){
             res.status(400).json({"message": "post failed"});
             return next(err);
         }
-        res.status(201).json({"event created": event});
+        res.status(201).json(event);
     });
 });
 
@@ -278,7 +279,6 @@ router.delete('/api/users/:user_id/events/:event_id', function(req, res, next){
         }
         res.status(202).json({"event deleted": event});
     });
-}); */
+});
 
 module.exports = router;
-

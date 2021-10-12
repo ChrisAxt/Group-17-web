@@ -5,7 +5,7 @@ var announcementSchema = new Schema({
     title: {type: String, required: 'Title is required'},
     body: {type: String},
     //Relationship attributes
-    clubId: {type: Schema.Types.ObjectId, ref: 'Club'},
+    creatorId: {type: Schema.Types.ObjectId, ref: 'User'}
 });
 
 module.exports = mongoose.model('announcements', announcementSchema);
