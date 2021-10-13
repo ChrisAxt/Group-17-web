@@ -12,11 +12,10 @@
                     <br>
                     <b-form-input placeholder="Event Name" list="input-list" id="input-with-list" v-model="newEvent.name"></b-form-input>
                     <br>
-                    <b-form-input placeholder="Adress" list="input-list" id="input-with-list" v-model="newEvent.location"></b-form-input>
+                    <b-form-input placeholder="Address" list="input-list" id="input-with-list" v-model="newEvent.location"></b-form-input>
                     <br>
                     <b-calendar v-model="newEvent.date" @context="onContext" locale="en-US"></b-calendar>
-                    <upload-image/>
-                    <select-type/>
+                    <event-checkbox :value="value" v-model="newEvent.isPublic"/>
                         <b-form-textarea id="textarea-auto-height" placeholder="Description" rows="3" max-rows="8" v-model="newEvent.description"></b-form-textarea>
                     <br><br>
                     <b-button class="CreateEvent" v-on:click="createEvent">Create</b-button>
@@ -31,13 +30,12 @@
 import { Api } from '@/Api'
 import ClubsSidebar from '@/components/ClubsSidebar.vue'
 import MainNavbar from '@/components/MainNavbar.vue'
-import SelectType from '@/components/SelectType.vue'
-import UploadImage from '@/components/UploadImage.vue'
+import EventCheckbox from '@/components/EventCheckbox.vue'
 // import EventsObject from '@/components/EventsObject.vue'
 
 export default ({
   name: 'events',
-  components: { ClubsSidebar, MainNavbar, SelectType, UploadImage/*, EventsObject */ },
+  components: { ClubsSidebar, MainNavbar, EventCheckbox },
 
   data() {
     return {
