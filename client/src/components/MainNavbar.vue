@@ -1,6 +1,6 @@
 <template>
 <body>
-    <divn>
+    <div>
 
   <b-navbar toggleable="lg" type="dark" variant="">
     <router-link to="/Home"><b-img :src="require('../assets/logoo.png')"></b-img></router-link>
@@ -15,7 +15,7 @@
 
           <router-link to="/SignIn"><b-button class="signOutBtn" to="/SignIn">Sign Out</b-button></router-link>
   </b-navbar>
-        </divn>
+        </div>
 
     </body>
 </template>
