@@ -10,29 +10,10 @@
     <router-link to="/Events"><b-navbar-brand>Events</b-navbar-brand></router-link>
     <router-link to="/Announcements"><b-navbar-brand>Announcements</b-navbar-brand></router-link>
 
-    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <b-form-input  size="sm" class="searchInput" placeholder="Search"></b-form-input>
         <b-button size="sm" name="searchBtn" class="searchBtn" type="submit">Search</b-button>
 
-    <b-collapse id="nav-collapse" is-nav>
-<!--    <b-navbar-nav>
-        <b-nav-item href="#">Link</b-nav-item>
-        <b-nav-item href="#" disabled>Disabled</b-nav-item>
-      </b-navbar-nav> -->
-
-      <!-- Right aligned nav items -->
-      <b-navbar-nav class="ml-auto">
-
-        <b-nav-item-dropdown right>
-          <!-- Using 'button-content' slot -->
-          <template #button-content>
-            <em>User</em>
-          </template>
-          <router-link to="/Profile"><b-dropdown-item to="/Profile">Profile</b-dropdown-item></router-link>
-          <router-link to="/SignIn"><b-dropdown-item to="/SignIn">Sign Out</b-dropdown-item></router-link>
-        </b-nav-item-dropdown>
-      </b-navbar-nav>
-    </b-collapse>
+          <router-link to="/SignIn"><b-button class="signOutBtn" to="/SignIn">Sign Out</b-button></router-link>
   </b-navbar>
         </divn>
 
@@ -84,5 +65,8 @@ Nav {
 }
 .searchInput {
     width: 50%;
+}
+.signOutBtn {
+  background-color: darkred;
 }
 </style>

@@ -2,7 +2,7 @@
 <b-list-group>
   <b-list-group-item href="#" class="flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">List group item heading</h5>
+      <h4 class="mb-1">{{ this.$route.params.currentEvent.name }}</h4>
       <small>3 days ago</small>
     </div>
 
@@ -14,3 +14,22 @@
   </b-list-group-item>
 </b-list-group>
 </template>
+<script>
+export default {
+  props: {
+    name: {
+      type: String
+    },
+    location: {
+      type: String
+    },
+    date: {
+      type: String
+    },
+    description: {
+      type: String
+    }
+  }
+
+}
+</script>

@@ -61,9 +61,9 @@ export default ({
       Api.post('/clubs', this.newClub)
         .then(response => {
           alert('The ' + response.data.name + ' Club has been created.')
-          this.newClub.name = null
-          this.newClub.tag = null
-          this.newClub.description = null
+          this.newClub.name = ''
+          this.newClub.tag = ''
+          this.newClub.description = ''
           this.$router.push({ name: 'clubs', params: { currentClub: this.newClub } })
         })
     }

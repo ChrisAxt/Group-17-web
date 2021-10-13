@@ -9,6 +9,7 @@ import Events from './views/Events.vue'
 import Profile from './views/Profile.vue'
 import CreateClub from './views/CreateClub.vue'
 import Announcements from './views/Announcements.vue'
+import CreateEvent from './views/CreateEvent.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -61,6 +62,11 @@ export default new Router({
       path: '/Announcements',
       name: 'announcements',
       component: Announcements
+    },
+    {
+      path: '/CreateEvent',
+      name: 'createEvent',
+      component: CreateEvent
     }
   ]
 })

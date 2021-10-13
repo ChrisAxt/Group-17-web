@@ -11,8 +11,8 @@
 <h1 text-align="center">Clubs</h1>
 <br>
   <b-row align-h="start">
-    <b-col v-for="club in clubs" v-bind:key="club" cols="12" sm="6" md="4">
-            <clubs-object v-bind:club="club"/>
+    <b-col v-for="club in clubs" v-bind:key="club._id" cols="12" sm="6" md="4">
+            <clubs-object :name="club.name" :tag="club.tag" :description="club.description" />
     </b-col>
 
   </b-row>
@@ -60,7 +60,7 @@ export default ({
     console.log('PAGE is loaded!')
     Api.get('/clubs')
       .then(response => {
-        console.log(response)
+        console.log(response.data)
         this.clubs = response.data.clubs
       })
       .catch(error => {
