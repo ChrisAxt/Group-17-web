@@ -1,12 +1,14 @@
 <template>
-<div>
-    <b-list-group>
-        <b-list-group-item href='#' class="flex-column align-items-start">
-        </b-list-group-item>
-    </b-list-group>
-    <div class="Edit-Button">
-        <b-button style="margin-left:15px;" v-on:click="Save" variant="edit">Save</b-button>
-    </div>
+  <div>
+  <b-card
+    :title="title"
+    style="max-width: 20rem;"
+    class="mb-2"
+  >
+    <b-card-text>
+    {{body}}
+    </b-card-text>
+  </b-card>
 </div>
 </template>
 

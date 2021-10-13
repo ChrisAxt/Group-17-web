@@ -2,6 +2,7 @@
     <body>
         <div>
             <main-navbar/>
+            <clubs-sidebar/>
         </div>
         <br>
         <br>
@@ -19,7 +20,7 @@
 
   <b-row align-h="center">
     <b-col cols="4">
-      <b-button v-on:click="deleteClub">Delete all Announcements</b-button>
+      <b-button v-on:click="deleteAnnouncements">Delete all Announcements</b-button>
     </b-col>
   </b-row>
 
@@ -38,11 +39,12 @@
 <script>
 import { Api } from '@/Api'
 import MainNavbar from '@/components/MainNavbar.vue'
+import ClubsSidebar from '@/components/ClubsSidebar.vue'
 import AnnouncementsObject from '@/components/AnnouncementsObject.vue'
 
 export default ({
   name: 'announcements',
-  components: { 'announcements-object': AnnouncementsObject, MainNavbar },
+  components: { ClubsSidebar, 'announcements-object': AnnouncementsObject, MainNavbar },
   mounted() {
     console.log('page is loaded!')
     Api.get('/announcements')
@@ -51,7 +53,7 @@ export default ({
         this.announcements = response.data.announcements
       })
       .catch(error => {
-        this.clubs = []
+        this.announcements = []
         console.log(error)
       })
       .then(() => {
@@ -71,7 +73,7 @@ export default ({
   },
   data() {
     return {
-      clubs: []
+      announcements: []
     }
   }
 })

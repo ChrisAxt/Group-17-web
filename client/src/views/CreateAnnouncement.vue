@@ -26,10 +26,11 @@
 import { Api } from '@/Api'
 
 import MainNavbar from '@/components/MainNavbar.vue'
+import ClubsSidebar from '@/components/ClubsSidebar.vue'
 
 export default ({
   name: 'announcements',
-  components: { MainNavbar },
+  components: { ClubsSidebar, MainNavbar },
   data() {
     return {
       newAnnouncement: {
