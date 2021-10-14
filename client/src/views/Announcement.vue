@@ -1,45 +1,25 @@
 <template>
-<div class="container rounded bg-white mt-5 mb-5">
-    <div class="row">
-        <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">{{$route.params.currentUser.universityId}}@student.gu.se</span><span> </span></div>
-        </div>
-        <div class="col-md-5 border-right">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Announcement</h4>
-                </div>
-                <div class="row mt-2">
-                    <div class="col-md-6">
-                        <label class="labels">Title</label><h1>{{ this.$route.params.currentAnnouncement.title }}</h1>
-                    </div>
-                    <div class="col-md-6"><label class="labels">Body</label><h1>{{ this.$route.params.currentAnnouncement.body }}</h1></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="p-3 py-5">
-            <h4 class="text-left">Edit</h4>
+
+<body>
+  <div>
+    <main-navbar/>
+      <clubs-sidebar/>
+        <br>
+          <b-container>
+            <b-col></b-col>
+              <b-col>
+                <br><br>
+                  <br>
+                  <b-form-input :placeholder="this.$route.params.currentAnnouncement.title" list="input-list" id="input-with-list" v-model="updatedAnnouncement.title"></b-form-input>
+                  <br>
+                  <b-form-textarea id="textarea-auto-height" :placeholder="this.$route.params.currentAnnouncement.body" rows="3" max-rows="8" v-model="updatedAnnouncement.body"></b-form-textarea>
+                  <br><br>
+                  <b-button class="editAnnouncement" v-on:click="Save">Save</b-button>
+                </b-col>
             <br>
-            <b-form-input placeholder="Title" list="input-list" id="input-with-list" v-model="updatedAnnouncement.title"></b-form-input>
-            <br>
-            <b-form-input placeholder="Name" list="input-list" id="input-with-list" v-model="updatedAnnouncement.body"></b-form-input>
-            <br>
-                <div class="col-md-12">
-                    <b-container class="bv-example-row">
-                    <b-row align-h="end">
-                        <b-col cols="4"><events-object/></b-col>
-                    </b-row>
-                    </b-container>
-                </div>
-                <div class="col-md-12"></div>
-            </div>
-            <div class="Edit-Button">
-                <b-button style="margin-left:15px;" v-on:click="Save" variant="edit">Save</b-button>
-            </div>
-        </div>
-    </div>
-</div>
+          </b-container>
+  </div>
+</body>
 </template>
 <script>
 
@@ -48,12 +28,18 @@ import { Api } from '@/Api'
 export default {
   name: 'Announcement',
   props: {
-    Title: {
+    title: {
       type: String
     },
-    Body: {
+    body: {
       type: String
     }
+  },
+  mounted() {
+    Api.get('/announcements/' + this.$route.params.currentAnnouncement_id)
+      .then(response => {
+        this.announcement = response.data
+      })
   },
   data() {
     return {
@@ -65,7 +51,7 @@ export default {
   },
   methods: {
     Save() {
-      Api.put(`/users/${this.$route.params.currentAnnouncement._id}`, this.updatedAnnouncement)
+      Api.put(`/announcements/${this.$route.params.currentAnnouncement._id}`, this.updatedAnnouncement)
       alert('Announcement: "' + this.title + '" was successfully updated!')
         .catch(error => {
           this.message = error
