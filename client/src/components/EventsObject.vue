@@ -33,3 +33,9 @@ export default {
 
 }
 </script>
+<style>
+.mb-1 {
+  color: #757575;
+}
+
+</style>

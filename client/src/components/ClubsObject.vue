@@ -15,26 +15,16 @@
     {{description}}
     </b-card-text>
     <b-dropdown href="#" variant="primary">Go somewhere</b-dropdown>
+    <b-button class="delBtn" variant="danger" v-on:click="$emit('del-club', club._id)">X</b-button>
   </b-card>
 </div>
 </template>
 <script>
-// @ is an alias to /src
-// import { Api } from '@/Api'
-// import CreateClub from '@/view/CreateClub.vue'
-
-/* export default {
-  name: 'create-card',
-  props: ['newClub']
-} */
-
-// import ClubsSidebar from '@/components/ClubsSidebar.vue'
-// import MainNavbar from '@/components/MainNavbar.vue'
-// import UploadImage from '@/components/UploadImage.vue'
-// import EventsObject from '@/components/EventsObject.vue'
 
 export default ({
+  name: 'clubs-object',
   props: {
+    club: {},
     name: {
       type: String
     },
@@ -48,3 +38,12 @@ export default ({
 
 })
 </script>
+<style>
+.mb-2 {
+  background-color: #505050;
+}
+.delBtn {
+  width: 15%;
+  float: right;
+}
+</style>
