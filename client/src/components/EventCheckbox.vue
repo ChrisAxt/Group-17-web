@@ -4,8 +4,8 @@
       id="checkbox-1"
       v-model="status"
       name="checkbox-1"
-      value=false
-      unchecked-value=true
+      value="false"
+      unchecked-value="true"
     >
       This event is private
     </b-form-checkbox>

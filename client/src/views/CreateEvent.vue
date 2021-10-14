@@ -31,7 +31,6 @@ import { Api } from '@/Api'
 import ClubsSidebar from '@/components/ClubsSidebar.vue'
 import MainNavbar from '@/components/MainNavbar.vue'
 import EventCheckbox from '@/components/EventCheckbox.vue'
-// import EventsObject from '@/components/EventsObject.vue'
 
 export default ({
   name: 'events',
@@ -48,11 +47,10 @@ export default ({
       selected: null,
       options: [
         { value: null, text: 'Please select an option' },
-        { value: 'a', text: 'Social' },
-        { value: 'b', text: 'Secret' },
-        { value: 'b', text: 'Lecture' },
-        { value: { C: '3PO' }, text: 'This is an option with object value' }
-        // { value: 'd', text: 'This one is disabled', disabled: true }
+        { value: 'Lecture', text: 'Lecture' },
+        { value: 'Party', text: 'Party' },
+        { value: 'Social', text: 'Social' },
+        { value: 'Exam', text: 'Exam' }
       ]
     }
   },

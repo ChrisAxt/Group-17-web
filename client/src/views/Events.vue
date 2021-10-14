@@ -10,8 +10,8 @@
                     <h1 text-align="center">All Events</h1>
                     <br>
                 </b-col>
-                <b-col v-for="event in events" v-bind:key="event">
-                    <events-object v-bind:event="event"/>
+                <b-col v-for="event in events" v-bind:key="event._id">
+                    <events-object :name="event.name" :location="event.location" :date="event.date" :description="event.description" />
                 </b-col>
                 <br>
                 <b-col>
