@@ -2,7 +2,11 @@
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">{{$route.params.currentUser.universityId}}@student.gu.se</span><span> </span></div>
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                <span class="font-weight-bold">{{this.universityId}}@student.gu.se</span>
+                <span> </span>
+            </div>
         </div>
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
@@ -11,9 +15,12 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col-md-6">
-                        <label class="labels">Student ID </label><h1>{{ this.$route.params.currentUser.universityId }}</h1>
+                        <label class="labels">Student ID </label>
+                        <h1>{{ this.universityId }}</h1>
                     </div>
-                    <div class="col-md-6"><label class="labels">Name</label><h1>{{ this.$route.params.currentUser.name }}</h1></div>
+                    <div class="col-md-6"><label class="labels">Name</label>
+                        <h1>{{ this.updatedUser.name }}</h1>
+                    </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12"><label class="labels">Education</label><h4>Software Engineering and Management</h4></div>
@@ -27,8 +34,7 @@
         <div class="col-md-4">
             <div class="p-3 py-5">
             <h4 class="text-left">Edit</h4>
-            <br>
-            <b-form-input placeholder="University ID" list="input-list" id="input-with-list" v-model="updatedUser.universityId"></b-form-input>
+
             <br>
             <b-form-input placeholder="Name" list="input-list" id="input-with-list" v-model="updatedUser.name"></b-form-input>
             <br>
@@ -55,31 +61,36 @@
 import { Api } from '@/Api'
 
 export default {
-  name: 'User',
-  props: {
-    UniId: {
-      type: String
-    },
-    Name: {
-      type: String
-    }
-  },
   data() {
     return {
+      universityId: '',
       updatedUser: {
         name: '',
         password: ''
       }
     }
   },
+  mounted() {
+    if (localStorage.universityId) {
+      this.universityId = localStorage.universityId
+      this.updatedUser.name = localStorage.name
+    } else {
+      this.universityId = '"University ID"'
+      this.updatedUser.name = '"Student name"'
+    }
+  },
   methods: {
     Save() {
-      this.universityId = this.$route.params.currentUser.universityId
-      Api.patch(`/users/${this.universityId}`, this.updatedUser)
-      alert('User: "' + this.universityId + '" was successfully updated!')
-        .catch(error => {
-          this.message = error
-        })
+      if (this.universityId !== 'University ID') {
+        Api.patch(`/users/${this.universityId}`, this.updatedUser)
+        localStorage.name = this.updatedUser.name
+        alert('User: "' + this.universityId + '" was successfully updated!')
+          .catch(error => {
+            this.message = error
+          })
+      } else {
+        alert('Please log-in to edit user information')
+      }
     }
   }
 }

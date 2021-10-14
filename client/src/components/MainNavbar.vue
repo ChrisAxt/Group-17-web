@@ -13,12 +13,28 @@
         <b-form-input  size="sm" class="searchInput" placeholder="Search"></b-form-input>
         <b-button size="sm" name="searchBtn" class="searchBtn" type="submit">Search</b-button>
 
-          <router-link to="/SignIn"><b-button class="signOutBtn" to="/SignIn">Sign Out</b-button></router-link>
+          <b-button class="signOutBtn" v-on:click="SignOut" variant="signOut">Sign Out</b-button>
   </b-navbar>
         </div>
 
     </body>
 </template>
+<script>
+export default {
+  name: 'home',
+  data() {
+    return {
+    }
+  },
+  methods: {
+    SignOut() {
+      localStorage.universityId = 'University ID'
+      localStorage.name = 'Name'
+      this.$router.push({ name: 'signIn' })
+    }
+  }
+}
+</script>
 
 <style scoped>
 h1 {text-align: center;}
@@ -67,6 +83,9 @@ Nav {
     width: 50%;
 }
 .signOutBtn {
-  background-color: darkred;
+  background-color: rgb(206, 0, 0);
+  width: 20%;
+  margin-left: 2%;
+
 }
 </style>
