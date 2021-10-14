@@ -12,7 +12,7 @@
 <br>
   <b-row align-h="start">
     <b-col v-for="announcement in announcements" v-bind:key="announcement._id" cols="12" sm="6" md="4">
-            <announcements-object :title="announcement.title" :body="announcement.body" />
+            <announcements-object :_id="announcement._id" :title="announcement.title" :body="announcement.body" />
     </b-col>
 
   </b-row>

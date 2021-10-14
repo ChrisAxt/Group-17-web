@@ -1,15 +1,12 @@
 <template>
-  <div>
-  <b-card
-    :title="title"
-    style="max-width: 20rem;"
-    class="mb-2"
-  >
-    <b-card-text>
-    {{body}}
-    </b-card-text>
-  </b-card>
-</div>
+<b-list-group>
+  <b-list-group-item v-bind:href="'/Announcement/'+ this._id">
+    <div class="d-flex w-100 justify-content-between">
+      <h4 class="mb-1">{{ title }}</h4>
+    </div>
+    <small>{{ body }}</small>
+  </b-list-group-item>
+</b-list-group>
 </template>
 
 <script>
@@ -18,6 +15,9 @@ import { Api } from '@/Api'
 
 export default {
   props: {
+    _id: {
+      type: String
+    },
     title: {
       type: String
     },
