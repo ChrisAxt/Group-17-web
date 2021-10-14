@@ -46,6 +46,8 @@ export default {
       Api.get(`/users/uniId/${this.universityId}`)
         .then(response => {
           this.user = response.data
+          localStorage.universityId = this.user.universityId
+          localStorage.name = this.user.name
           if (this.user != null) {
             alert('Found user:' + JSON.stringify(this.user, null, 2))
             this.$router.push({ name: 'profile', params: { currentUser: this.user } })

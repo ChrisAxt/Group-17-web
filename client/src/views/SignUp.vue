@@ -57,7 +57,9 @@ export default {
           .then(response => {
             this.user = response.data
             if (this.user != null) {
-              this.$router.push({ name: 'profile', params: { currentUser: this.user } })
+              localStorage.universityId = this.user.universityId
+              localStorage.name = this.user.name
+              this.$router.push({ name: 'profile' })
             }
           })
           .catch(error => {
