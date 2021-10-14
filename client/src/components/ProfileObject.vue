@@ -43,7 +43,7 @@
                 <div class="col-md-12">
                     <b-container class="bv-example-row">
                     <b-row align-h="end">
-                        <b-col cols="4"><events-object/></b-col>
+                        <b-col cols="4"></b-col>
                     </b-row>
                     </b-container>
                 </div>
