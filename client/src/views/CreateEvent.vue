@@ -16,7 +16,7 @@
                     <br>
                     <b-calendar v-model="newEvent.date" @context="onContext" locale="en-US"></b-calendar>
                     <upload-image/>
-                    <select-type/>
+                    <b-form-select :options="options" v-model="newEvent.tag"></b-form-select>
                         <b-form-textarea id="textarea-auto-height" placeholder="Description" rows="3" max-rows="8" v-model="newEvent.description"></b-form-textarea>
                     <br><br>
                     <b-button class="CreateEvent" v-on:click="createEvent">Create</b-button>
@@ -31,13 +31,11 @@
 import { Api } from '@/Api'
 import ClubsSidebar from '@/components/ClubsSidebar.vue'
 import MainNavbar from '@/components/MainNavbar.vue'
-import SelectType from '@/components/SelectType.vue'
 import UploadImage from '@/components/UploadImage.vue'
-// import EventsObject from '@/components/EventsObject.vue'
 
 export default ({
   name: 'events',
-  components: { ClubsSidebar, MainNavbar, SelectType, UploadImage/*, EventsObject */ },
+  components: { ClubsSidebar, MainNavbar, UploadImage },
 
   data() {
     return {
@@ -50,11 +48,10 @@ export default ({
       selected: null,
       options: [
         { value: null, text: 'Please select an option' },
-        { value: 'a', text: 'Social' },
-        { value: 'b', text: 'Secret' },
-        { value: 'b', text: 'Lecture' },
-        { value: { C: '3PO' }, text: 'This is an option with object value' }
-        // { value: 'd', text: 'This one is disabled', disabled: true }
+        { value: 'Lecture', text: 'Lecture' },
+        { value: 'Party', text: 'Party' },
+        { value: 'Social', text: 'Social' },
+        { value: 'Exam', text: 'Exam' }
       ]
     }
   },

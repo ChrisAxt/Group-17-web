@@ -33,11 +33,10 @@ import { Api } from '@/Api'
 import ClubsSidebar from '@/components/ClubsSidebar.vue'
 import MainNavbar from '@/components/MainNavbar.vue'
 import UploadImage from '@/components/UploadImage.vue'
-// import EventsObject from '@/components/EventsObject.vue'
 
 export default ({
   name: 'clubs',
-  components: { ClubsSidebar, MainNavbar, UploadImage/*, EventsObject */ },
+  components: { ClubsSidebar, MainNavbar, UploadImage },
   data() {
     return {
       newClub: {
@@ -48,11 +47,9 @@ export default ({
       selected: null,
       options: [
         { value: null, text: 'Please select an option' },
-        { value: 'a', text: 'Social' },
-        { value: 'b', text: 'Secret' },
-        { value: 'b', text: 'Lecture' },
-        { value: { C: '3PO' }, text: 'This is an option with object value' }
-        // { value: 'd', text: 'This one is disabled', disabled: true }
+        { value: 'Course', text: 'Course' },
+        { value: 'Secret Club', text: 'Secret' },
+        { value: 'Social Club', text: 'Social' }
       ]
     }
   },
