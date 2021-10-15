@@ -11,11 +11,11 @@
                     <br>
                 </b-col>
                 <b-col v-for="event in events" v-bind:key="event._id">
-                    <events-object :name="event.name" :location="event.location" :date="event.date" :description="event.description" />
+                    <events-object v-bind:event="event" v-on:del-event="deleteEvent" :name="event.name" :location="event.location" :date="event.date" :description="event.description" />
                 </b-col>
                 <br>
                 <b-col>
-                    <b-button v-on:click="deleteEvent">Delete all Events</b-button>
+                    <b-button v-on:click="deleteEvents">Delete all Events</b-button>
                 </b-col>
             </b-container>
             <br><br><br><br>
@@ -50,12 +50,20 @@ export default ({
   },
 
   methods: {
-    deleteEvent() {
+    deleteEvents() {
       console.log('Delete all Events')
       Api.delete('/events')
         .then(response => {
           console.log(response)
           this.events = response.data.events
+        })
+    },
+    deleteEvent(id) {
+      console.log(`Delete event with id ${id}`)
+      Api.delete(`/events/${id}`)
+        .then(response => {
+          const index = this.events.findIndex(event => event._id === id)
+          this.events.splice(index, 1)
         })
     }
   },

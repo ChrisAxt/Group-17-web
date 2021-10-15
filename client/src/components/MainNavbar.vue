@@ -10,7 +10,7 @@
     <router-link to="/Events"><b-navbar-brand v-b-toggle.sidebar-no-header>Events</b-navbar-brand></router-link>
     <router-link to="/Announcements"><b-navbar-brand v-b-toggle.sidebar-no-header>Announcements</b-navbar-brand></router-link>
 
-        <b-form-input  size="sm" class="searchInput" placeholder="Search"></b-form-input>
+        <b-form-input  size="sm" class="searchInput" placeholder="Search"></b-form-input> &nbsp;&nbsp;&nbsp;
         <b-button size="sm" name="searchBtn" class="searchBtn" type="submit">Search</b-button>
 
           <b-button class="signOutBtn" v-on:click="SignOut" variant="signOut">Sign Out</b-button>
@@ -84,6 +84,7 @@ Nav {
 }
 .signOutBtn {
   background-color: rgb(206, 0, 0);
+  color: white;
   width: 20%;
   margin-left: 2%;
 

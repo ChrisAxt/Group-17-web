@@ -12,7 +12,7 @@
 <br>
   <b-row align-h="start">
     <b-col v-for="club in clubs" v-bind:key="club._id" cols="12" sm="6" md="4">
-            <clubs-object :name="club.name" :tag="club.tag" :description="club.description" />
+            <clubs-object v-bind:club="club" v-on:del-club="deleteClub" :name="club.name" :tag="club.tag" :description="club.description" />
     </b-col>
 
   </b-row>
@@ -21,7 +21,7 @@
 
   <b-row align-h="center">
     <b-col cols="4">
-      <b-button v-on:click="deleteClub">Delete all Clubs</b-button>
+      <b-button v-on:click="deleteClubs">Delete all Clubs</b-button>
     </b-col>
   </b-row>
 
@@ -33,15 +33,6 @@
 
   <br>
 
-  <!--<b-row align-h="around">
-    <b-col cols="4">One of two columns</b-col>
-    <b-col cols="4">One of two columns</b-col>
-  </b-row>
-
-  <b-row align-h="between">
-    <b-col cols="4">One of two columns</b-col>
-    <b-col cols="4">One of two columns</b-col>
-  </b-row>-->
 </b-container>
 
     </body>
@@ -50,12 +41,11 @@
 import { Api } from '@/Api'
 import ClubsSidebar from '@/components/ClubsSidebar.vue'
 import MainNavbar from '@/components/MainNavbar.vue'
-// import EventsObject from '@/components/EventsObject.vue'
 import ClubsObject from '@/components/ClubsObject.vue'
 
 export default ({
   name: 'clubs',
-  components: { ClubsSidebar, MainNavbar, 'clubs-object': ClubsObject /*, EventsObject */ },
+  components: { ClubsSidebar, MainNavbar, 'clubs-object': ClubsObject },
   mounted() {
     console.log('PAGE is loaded!')
 
@@ -91,15 +81,24 @@ export default ({
   },
 
   methods: {
-    deleteClub() {
+    deleteClubs() {
       console.log('Delete all clubs')
       Api.delete('/clubs')
         .then(response => {
           console.log(response)
           this.clubs = response.data.clubs
         })
+    },
+    deleteClub(id) {
+      console.log(`Delete club with id ${id}`)
+      Api.delete(`/clubs/${id}`)
+        .then(response => {
+          const index = this.clubs.findIndex(club => club._id === id)
+          this.clubs.splice(index, 1)
+        })
     }
   },
+
   data() {
     return {
       clubs: []

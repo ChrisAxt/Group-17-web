@@ -11,12 +11,15 @@
     </p>
 
     <small>{{ location }}</small>
+    <b-button class="delBtn" variant="danger" v-on:click="$emit('del-event', event._id)">X</b-button>
   </b-list-group-item>
 </b-list-group>
 </template>
 <script>
 export default {
+  name: 'events-object',
   props: {
+    event: {},
     name: {
       type: String
     },
@@ -33,3 +36,9 @@ export default {
 
 }
 </script>
+<style>
+.mb-1 {
+  color: #757575;
+}
+
+</style>
