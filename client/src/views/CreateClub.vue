@@ -42,7 +42,8 @@ export default ({
       newClub: {
         name: '',
         tag: '',
-        description: ''
+        description: '',
+        ownerId: ''
       },
       selected: null,
       options: [
@@ -55,14 +56,19 @@ export default ({
   },
   methods: {
     createClub() {
-      Api.post('/clubs', this.newClub)
-        .then(response => {
-          alert('The ' + response.data.name + ' Club has been created.')
-          this.newClub.name = ''
-          this.newClub.tag = ''
-          this.newClub.description = ''
-          this.$router.push({ name: 'clubs', params: { currentClub: this.newClub } })
-        })
+      if (localStorage.universityId !== '') {
+        Api.post(`/users/${localStorage.universityId}/clubs`, this.newClub)
+          .then(response => {
+            alert('The ' + response.data.name + ' Club has been created.')
+            this.newClub.name = ''
+            this.newClub.tag = ''
+            this.newClub.description = ''
+            this.$router.push({ name: 'clubs', params: { currentClub: this.newClub } })
+          })
+      } else {
+        alert('Please log in in order to create a club')
+        this.$router.push({ name: 'signIn' })
+      }
     }
   }
 

@@ -28,8 +28,8 @@ export default {
   },
   methods: {
     SignOut() {
-      localStorage.universityId = 'University ID'
-      localStorage.name = 'Name'
+      localStorage.universityId = ''
+      localStorage.name = ''
       this.$router.push({ name: 'signIn' })
     }
   }

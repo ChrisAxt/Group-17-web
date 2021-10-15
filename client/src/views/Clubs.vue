@@ -58,19 +58,36 @@ export default ({
   components: { ClubsSidebar, MainNavbar, 'clubs-object': ClubsObject /*, EventsObject */ },
   mounted() {
     console.log('PAGE is loaded!')
-    Api.get('/clubs')
-      .then(response => {
-        console.log(response.data)
-        this.clubs = response.data.clubs
-      })
-      .catch(error => {
-        this.clubs = []
-        console.log(error)
+
+    if (localStorage.universityId !== '') {
+      Api.get(`/users/${localStorage.universityId}/clubs`)
+        .then(response => {
+          console.log(response.data)
+          this.clubs = response.data
+        })
+        .catch(error => {
+          this.clubs = []
+          console.log(error)
         //   TODO: display some error message instead of logging to console
-      })
-      .then(() => {
-        console.log('This runs every time after success or error.')
-      })
+        })
+        .then(() => {
+          console.log('This runs every time after success or error.')
+        })
+    } else {
+      Api.get('/clubs')
+        .then(response => {
+          console.log(response.data)
+          this.clubs = response.data.clubs
+        })
+        .catch(error => {
+          this.clubs = []
+          console.log(error)
+        //   TODO: display some error message instead of logging to console
+        })
+        .then(() => {
+          console.log('This runs every time after success or error.')
+        })
+    }
   },
 
   methods: {

@@ -6,7 +6,7 @@ var clubSchema = new Schema({
     tag: {type: String},
     description: {type: String},
     //Relationship attributes
-    ownerId: {type: Schema.Types.ObjectId, ref: 'User'},
+    ownerId: {type: String},
     participantIds: {type: Array}
 });
 

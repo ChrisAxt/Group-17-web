@@ -173,10 +173,10 @@ router.delete('/api/users/:id', function(req, res, next) {
 });
 
 //Below: relationship requests user-club (1:N)
-router.post('/api/users/:user_id/clubs', function(req, res, next) {
+router.post('/api/users/:uni_id/clubs', function(req, res, next) {
 
     var club = new Club(req.body);
-    club.ownerId = req.params.user_id;
+    club.ownerId = req.params.uni_id;
     club.participantIds.push(club.ownerId); 
     
     club.save(function (err) {

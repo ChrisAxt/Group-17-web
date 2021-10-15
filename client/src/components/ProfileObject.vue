@@ -74,14 +74,11 @@ export default {
     if (localStorage.universityId) {
       this.universityId = localStorage.universityId
       this.updatedUser.name = localStorage.name
-    } else {
-      this.universityId = '"University ID"'
-      this.updatedUser.name = '"Student name"'
     }
   },
   methods: {
     Save() {
-      if (this.universityId !== 'University ID') {
+      if (this.universityId !== '') {
         Api.patch(`/users/${this.universityId}`, this.updatedUser)
         localStorage.name = this.updatedUser.name
         alert('User: "' + this.universityId + '" was successfully updated!')
