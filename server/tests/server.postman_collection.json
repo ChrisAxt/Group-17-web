@@ -1188,6 +1188,24 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
 				}
 			]
 		},
@@ -1265,6 +1283,76 @@
 					"response": []
 				},
 				{
+					"name": "PUT /api/announcements",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"var announcementTitle = jsonData.title;\r",
+									"pm.environment.set(\"announcement_title\", announcementTitle);\r",
+									"var getAnnouncementTitle = pm.variables.get(\"announcement_title\");\r",
+									"\r",
+									"var announcementBody = jsonData.body;\r",
+									"pm.environment.set(\"announcement_body\", announcementBody);\r",
+									"var getAnnouncementBody = pm.variables.get(\"announcement_body\");\r",
+									"\r",
+									"pm.test(\"Update successful\", function () {\r",
+									"    pm.expect(jsonData.title).to.eql(pm.variables.get(\"announcement_title\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"important announcement edited\",\r\n    \"body\": \"something happened to the body of this announcement...\"\r\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/announcements/{{announcement_id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"announcements",
+								"{{announcement_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "DELETE /api/announcements/id",
 					"event": [
 						{
@@ -1317,7 +1405,7 @@
 					"response": []
 				},
 				{
-					"name": "POST /api/announcements",
+					"name": "POST /api/announcements for delete",
 					"event": [
 						{
 							"listen": "test",
