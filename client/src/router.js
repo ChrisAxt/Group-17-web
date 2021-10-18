@@ -11,7 +11,6 @@ import CreateClub from './views/CreateClub.vue'
 import Announcements from './views/Announcements.vue'
 import CreateEvent from './views/CreateEvent.vue'
 import CreateAnnouncement from './views/CreateAnnouncement.vue'
-import Announcement from './views/Announcement.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -74,11 +73,6 @@ export default new Router({
       path: '/CreateAnnouncement',
       name: 'createAnnouncement',
       component: CreateAnnouncement
-    },
-    {
-      path: '/Announcement/:id',
-      name: 'announcement',
-      component: Announcement
     }
   ]
 })
