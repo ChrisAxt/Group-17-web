@@ -2,16 +2,16 @@
 
   <b-card
     class="d-flex w-100 justify-content-between">
-    <b-card-title
-      contenteditable="true"
+    <b-form-input
       v-model="updatedAnnouncement.title"
+      :placeholder="title"
       >{{ title }}
-    </b-card-title>
-    <b-card-text
+    </b-form-input>
+    <b-form-input
       v-model="updatedAnnouncement.body"
-      contenteditable="true">
-      {{ body }}
-    </b-card-text>
+      :placeholder="body"
+      >{{ body }}
+    </b-form-input>
     <b-button v-on:click="Save" variant="edit">Save</b-button>
   </b-card>
 
@@ -36,14 +36,13 @@ export default {
   data() {
     return {
       updatedAnnouncement: {
-        title: '' + ' edited',
-        body: '' + ' edited'
+        title: '',
+        body: ''
       }
     }
   },
   methods: {
     Save() {
-      console.log(this.updatedAnnouncement)
       Api.put(`/announcements/${this._id}`, this.updatedAnnouncement)
         .then(response => {
           this.updatedAnnouncement = response.data
