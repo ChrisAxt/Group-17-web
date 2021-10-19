@@ -12,17 +12,17 @@ var clubsController = require('./controllers/clubs');
 
 // Connect for deploy
 
-/* const { MongoClient } = require('mongodb');
-const mongoURI = "mongodb+srv://mackfresh:Andalen56@clusterbuster.vxc97.mongodb.net/SEMbase?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
+const { MongoClient } = require('mongodb');
+const mongoURI = "mongodb+srv://gianmarco_iachella:sembookdbpw@clusterbuster.vxc97.mongodb.net/sembookdb?retryWrites=true&w=majority";
+const mongoClient = new MongoClient(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
+/* mongoClient.connect(err => {
+  const collection = mongoClient.db("test").collection("devices");
   // perform actions on the collection object
-  client.close();
-});
- */
+  mongoClient.close();
+}); */
+
 // Variables
-var mongoURI = process.env.MONGODB_URI  || 'mongodb://localhost:27017/SEMbookDB';
+//var mongoURI = process.env.MONGODB_URI  || 'mongodb://localhost:27017/SEMbookDB';
 var port = process.env.PORT || 3001;
 
 
