@@ -1,6 +1,7 @@
 <template>
     <body>
         <div>
+            <main-navbar/>
             <clubs-sidebar/>
             <br>
             <b-container>
@@ -30,11 +31,12 @@
 import { Api } from '@/Api'
 
 import ClubsSidebar from '@/components/ClubsSidebar.vue'
+import MainNavbar from '@/components/MainNavbar.vue'
 import UploadImage from '@/components/UploadImage.vue'
 
 export default ({
   name: 'clubs',
-  components: { ClubsSidebar, UploadImage },
+  components: { ClubsSidebar, MainNavbar, UploadImage },
   data() {
     return {
       newClub: {
