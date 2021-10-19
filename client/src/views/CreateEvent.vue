@@ -15,7 +15,8 @@
                     <b-form-input placeholder="Address" list="input-list" id="input-with-list" v-model="newEvent.location"></b-form-input>
                     <br>
                     <b-calendar v-model="newEvent.date" @context="onContext" locale="en-US"></b-calendar>
-                    <event-checkbox :value="value" v-model="newEvent.isPublic"/>
+                    <br>
+                    <b-form-select :options="options" v-model="newEvent.isPublic"/>
                         <b-form-textarea id="textarea-auto-height" placeholder="Description" rows="3" max-rows="8" v-model="newEvent.description"></b-form-textarea>
                     <br><br>
                     <b-button class="CreateEvent" v-on:click="createEvent">Create</b-button>
@@ -30,11 +31,10 @@
 import { Api } from '@/Api'
 import ClubsSidebar from '@/components/ClubsSidebar.vue'
 import MainNavbar from '@/components/MainNavbar.vue'
-import EventCheckbox from '@/components/EventCheckbox.vue'
 
 export default ({
   name: 'events',
-  components: { ClubsSidebar, MainNavbar, EventCheckbox },
+  components: { ClubsSidebar, MainNavbar },
 
   data() {
     return {
@@ -47,10 +47,8 @@ export default ({
       selected: null,
       options: [
         { value: null, text: 'Please select an option' },
-        { value: 'Lecture', text: 'Lecture' },
-        { value: 'Party', text: 'Party' },
-        { value: 'Social', text: 'Social' },
-        { value: 'Exam', text: 'Exam' }
+        { value: 'true', text: 'Public' },
+        { value: 'false', text: 'Private' }
       ]
     }
   },
