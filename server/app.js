@@ -14,6 +14,7 @@ var clubsController = require('./controllers/clubs');
 
 const { MongoClient } = require('mongodb');
 const mongoURI = "mongodb+srv://gianmarco_iachella:sembookdbpw@clusterbuster.vxc97.mongodb.net/sembookdb?retryWrites=true";
+//These below are not necessary due to them being run at "Connect to MongoDB" below
 /*const mongoClient = new MongoClient(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
  mongoClient.connect(err => {
   const collection = mongoClient.db("test").collection("devices");
@@ -22,6 +23,7 @@ const mongoURI = "mongodb+srv://gianmarco_iachella:sembookdbpw@clusterbuster.vxc
 }); */
 
 // Variables
+//This below is not necessary due to it being set at "Connect for deploy" above
 //var mongoURI = process.env.MONGODB_URI  || 'mongodb://localhost:27017/SEMbookDB';
 var port = process.env.PORT || 3001;
 
