@@ -48,5 +48,5 @@ deploy:
     refs:
       - master
     variables:
-      - sembook: $HEROKU_APP_NAME
-      - d20634b1-5b03-4c33-ae72-98cc4c100ea8: $HEROKU_API_KEY
+      - $HEROKU_APP_NAME: sembook
+      - $HEROKU_API_KEY: d20634b1-5b03-4c33-ae72-98cc4c100ea8
