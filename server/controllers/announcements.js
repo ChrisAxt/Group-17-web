@@ -87,7 +87,7 @@ router.put('/api/announcements/:id', function(req, res, next) {
             return res.status(404).json({"message": "announcement not found"});
         }
         announcement.title = req.body.title + " [Edited]";
-        announcement.body = req.body.body + " [Edited]";
+        announcement.body = req.body.body;
         announcement.save();
         res.status(200).json({"announcement updated via put": announcement});
     });
