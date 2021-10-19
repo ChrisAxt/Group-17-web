@@ -14,9 +14,8 @@
                     <br>
                     <b-form-input placeholder="Address" list="input-list" id="input-with-list" v-model="newEvent.location"></b-form-input>
                     <br>
-                    <b-calendar v-model="newEvent.date" @context="onContext" locale="en-US"></b-calendar>
-                    <br>
-                    <b-form-select :options="options" v-model="newEvent.isPublic"/>
+                    <b-form-datepicker id="example-datepicker" v-model="newEvent.date" class="mb-2"></b-form-datepicker>
+                    <event-checkbox :value="value" v-model="newEvent.isPublic"/>
                         <b-form-textarea id="textarea-auto-height" placeholder="Description" rows="3" max-rows="8" v-model="newEvent.description"></b-form-textarea>
                     <br><br>
                     <b-button class="CreateEvent" v-on:click="createEvent">Create</b-button>

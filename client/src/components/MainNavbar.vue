@@ -13,7 +13,7 @@
         <b-form-input  size="sm" class="searchInput" placeholder="Search"></b-form-input> &nbsp;&nbsp;&nbsp;
         <b-button size="sm" name="searchBtn" class="searchBtn" type="submit">Search</b-button>
 
-          <b-button class="signOutBtn" v-on:click="SignOut" variant="signOut">Sign Out</b-button>
+          <b-button variant="danger" class="signOutBtn"  v-on:click="SignOut" >Sign Out</b-button>
   </b-navbar>
         </div>
 
@@ -43,13 +43,9 @@ p {text-align: center;}
 div {text-align: left;}
 form {text-align: center;}
 
-body {
-    background-color: red;
-}
 button {
     box-shadow: 0 6px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     transition-duration: 0.4s;
-    background-color:gray;
     border-radius: 8px;
     width: 45%;
 
@@ -83,7 +79,6 @@ Nav {
     width: 50%;
 }
 .signOutBtn {
-  background-color: rgb(206, 0, 0);
   color: white;
   width: 20%;
   margin-left: 2%;
