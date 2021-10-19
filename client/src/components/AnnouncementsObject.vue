@@ -7,12 +7,14 @@
       :placeholder="title"
       >{{ title }}
     </b-form-input>
-    <b-form-input
+    <br>
+    <b-form-textarea id="textarea-auto-height" rows="3" max-rows="8"
       v-model="updatedAnnouncement.body"
       :placeholder="body"
       >{{ body }}
-    </b-form-input>
-    <b-button v-on:click="Save" variant="edit">Save</b-button>
+    </b-form-textarea>
+    <br>
+    <b-button class="saveBtn" v-on:click="Save" variant="edit">Save</b-button>
   </b-card>
 
 </template>
@@ -66,3 +68,8 @@ export default {
   }
 }
 </script>
+<style>
+.saveBtn {
+  width: 45%;
+}
+</style>

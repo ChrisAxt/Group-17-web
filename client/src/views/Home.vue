@@ -10,11 +10,11 @@
                     <br><br>
                     <h1>Welcome to SEMbook!</h1>
                     <br>
-                    <img :src="require('../assets/logoo.png')">
+                    <img class="logo" :src="require('../assets/logoo.png')">
                     <br><br>
                     <h4 text-align="right">Created by Team 17</h4>
                 </b-col>
-            <br><br><br><br><br>
+            <br><br><br>
             </b-container>
         </div>
 
@@ -34,9 +34,9 @@ export default ({ components: { ClubsSidebar, MainNavbar } })
 input{
     background-color: lightgray;
 }
-img {
+.logo {
     background: url('/assets/logo.png');
-    width: 25%;
+    width: 30%;
     height: auto;
 }
 </style>
