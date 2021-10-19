@@ -14,7 +14,7 @@
                     <br><br>
                     <h4 text-align="right">Created by Team 17</h4>
                 </b-col>
-            <br>
+            <br><br><br><br><br>
             </b-container>
         </div>
 
