@@ -40,13 +40,13 @@ deploy:
   script:
     - apk update && apk add git curl
     - gem install dpl
-    - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY
+    - dpl --provider=heroku --app=sembook --api-key=d20634b1-5b03-4c33-ae72-98cc4c100ea8
   environment:
     name: production
-    url: https://$HEROKU_APP_NAME.herokuapp.com/
+    url: https://sembook.herokuapp.com/
   only:
     refs:
       - master
     variables:
-      - $HEROKU_APP_NAME: sembook
-      - $HEROKU_API_KEY: d20634b1-5b03-4c33-ae72-98cc4c100ea8
+      - $HEROKU_APP_NAME
+      - $HEROKU_API_KEY
