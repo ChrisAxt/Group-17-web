@@ -1,9 +1,10 @@
 <template>
     <body>
         <div>
+            <main-navbar/>
             <clubs-sidebar/>
             <br>
-            <b-container>
+            <b-container id="textLogo">
                 <b-col></b-col>
                 <b-col>
                     <br><br>
@@ -21,6 +22,23 @@
 </template>
 <script>
 import ClubsSidebar from '@/components/ClubsSidebar.vue'
+import MainNavbar from '@/components/MainNavbar.vue'
 
-export default ({ components: { ClubsSidebar } })
+export default ({ components: { ClubsSidebar, MainNavbar } })
 </script>
+<style>
+h1 {text-align: center;}
+h3 {text-align: center;}
+p {text-align: center;}
+div {text-align: center;}
+form{text-align: center;}
+
+input{
+    background-color: lightgray;
+}
+img {
+    background: url('/assets/logo.png');
+    width: 25%;
+    height: auto;
+}
+</style>

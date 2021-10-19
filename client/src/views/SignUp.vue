@@ -1,5 +1,10 @@
 <template>
 <body>
+      <div id="nav">
+      <router-link to="/">Sign In</router-link> |
+      <router-link to="/SignUp">Sign Up</router-link> |
+      <router-link to="/Home">Home</router-link> |
+    </div>
     <b-container class="bv-example-row">
         <b-img :src="require('../assets/logo.png')"></b-img>
         <br>

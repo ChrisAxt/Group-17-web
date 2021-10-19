@@ -1,11 +1,10 @@
 <template>
   <div id="app" background-color='blue'>
-    <main-navbar/>
     <!-- <div id="nav">
-      <router-link to="/">App Start</router-link> |
-      <router-link to="/SignIn">Sign In</router-link> |
+      <router-link to="/">Sign In</router-link> |
       <router-link to="/SignUp">Sign Up</router-link> |
       <router-link to="/Home">Home</router-link> |
+      <router-link to="/">App Start</router-link> |
       <router-link to="/Clubs">Clubs</router-link> |
       <router-link to="/Events">Events</router-link> |
       <router-link to="/Announcements">Announcements</router-link> |
@@ -18,12 +17,10 @@
 </template>
 <script>
 import MyFooter from '@/components/MyFooter.vue'
-import MainNavbar from '@/components/MainNavbar.vue'
 
 export default {
   components: {
-    MyFooter,
-    MainNavbar
+    MyFooter
   }
 
 }
