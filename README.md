@@ -66,10 +66,11 @@ The purpose of this system is to provide students a simple and all-in-one platfo
 ### Pages
 
 * Home: displays feed containing latest information related to the clubs they are part of
-* Profile: displays user information (e.g., ID, profile picture)
-* Search: allows user to find events and clubs to join
-* Calendar: shows all the events that are part of the user's schedule
-(More to come)
+* Profile: displays user information (e.g., ID, Name)
+* Clubs: displays clubs information (e.g., Name, description)
+* Events: displays upcoming events
+* Announcements: shows relevant updates about events or clubs
+* Sidebar: double click on the NavBar (either Clubs, Announcements, Events) to open the sidebar for creating new entities!
 
 ### Entity-Relationship (ER) Diagram
 
