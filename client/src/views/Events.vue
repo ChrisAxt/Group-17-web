@@ -7,11 +7,11 @@
             <b-container>
                 <b-col></b-col>
                 <b-col>
-                    <h1 text-align="center">All Events</h1>
+                    <h1 text-align="center">Events</h1>
                     <br>
                 </b-col>
                 <b-col v-for="event in events" v-bind:key="event._id">
-                    <events-object v-bind:event="event" v-on:del-event="deleteEvent" :name="event.name" :location="event.location" :date="event.date" :description="event.description" />
+                    <events-object v-bind:event="event" v-on:del-event="deleteEvent" :name="event.name" :location="event.location" :date="event.date" :description="event.description" :isPublic="event.isPublic"/>
                 </b-col>
                 <br>
                 <b-col>

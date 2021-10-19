@@ -10,9 +10,22 @@ var announcementsController = require('./controllers/announcements');
 var eventsController = require('./controllers/events');
 var clubsController = require('./controllers/clubs');
 
+// Connect for deploy
+
+/* const { MongoClient } = require('mongodb');
+const mongoURI = "mongodb+srv://mackfresh:Andalen56@clusterbuster.vxc97.mongodb.net/SEMbase?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+ */
 // Variables
 var mongoURI = process.env.MONGODB_URI  || 'mongodb://localhost:27017/SEMbookDB';
 var port = process.env.PORT || 3001;
+
+
 
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err) {
