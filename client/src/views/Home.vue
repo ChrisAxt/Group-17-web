@@ -4,17 +4,17 @@
             <main-navbar/>
             <clubs-sidebar/>
             <br>
-            <b-container id="textLogo">
+            <b-container>
                 <b-col></b-col>
-                <b-col>
+                <b-col id="homePage">
                     <br><br>
-                    <h1 text-align="center">Welcome to SEMbook!</h1>
+                    <h1>Welcome to SEMbook!</h1>
                     <br>
-                    <img :src="require('../assets/logoo.png')">
+                    <img class="logo" :src="require('../assets/logoo.png')">
                     <br><br>
                     <h4 text-align="right">Created by Team 17</h4>
                 </b-col>
-            <br>
+            <br><br><br>
             </b-container>
         </div>
 
@@ -27,18 +27,16 @@ import MainNavbar from '@/components/MainNavbar.vue'
 export default ({ components: { ClubsSidebar, MainNavbar } })
 </script>
 <style>
-h1 {text-align: center;}
-h3 {text-align: center;}
-p {text-align: center;}
-div {text-align: center;}
-form{text-align: center;}
-
+#homePage {
+    float: center;
+    text-align: center;
+}
 input{
     background-color: lightgray;
 }
-img {
+.logo {
     background: url('/assets/logo.png');
-    width: 25%;
+    width: 30%;
     height: auto;
 }
 </style>
