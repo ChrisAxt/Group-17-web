@@ -1,7 +1,6 @@
 <template>
     <body>
         <div>
-            <main-navbar/>
             <clubs-sidebar/>
             <br>
             <b-container>
@@ -30,11 +29,10 @@
 <script>
 import { Api } from '@/Api'
 import ClubsSidebar from '@/components/ClubsSidebar.vue'
-import MainNavbar from '@/components/MainNavbar.vue'
 
 export default ({
   name: 'events',
-  components: { ClubsSidebar, MainNavbar },
+  components: { ClubsSidebar },
 
   data() {
     return {

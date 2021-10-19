@@ -1,5 +1,6 @@
 <template>
   <div id="app" background-color='blue'>
+    <main-navbar/>
     <!-- <div id="nav">
       <router-link to="/">App Start</router-link> |
       <router-link to="/SignIn">Sign In</router-link> |
@@ -17,10 +18,12 @@
 </template>
 <script>
 import MyFooter from '@/components/MyFooter.vue'
+import MainNavbar from '@/components/MainNavbar.vue'
 
 export default {
   components: {
-    MyFooter
+    MyFooter,
+    MainNavbar
   }
 
 }

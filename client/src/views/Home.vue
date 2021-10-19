@@ -1,7 +1,6 @@
 <template>
     <body>
         <div>
-            <main-navbar/>
             <clubs-sidebar/>
             <br>
             <b-container>
@@ -21,8 +20,7 @@
 </template>
 <script>
 import ClubsSidebar from '@/components/ClubsSidebar.vue'
-import MainNavbar from '@/components/MainNavbar.vue'
 import EventsObject from '@/components/EventsObject.vue'
 
-export default ({ components: { ClubsSidebar, MainNavbar, EventsObject } })
+export default ({ components: { ClubsSidebar, EventsObject } })
 </script>

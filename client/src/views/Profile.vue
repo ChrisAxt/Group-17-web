@@ -1,7 +1,6 @@
 <template>
     <body>
         <div>
-            <main-navbar/>
             <clubs-sidebar/>
             <profile-object/>
         </div>
@@ -10,8 +9,7 @@
 </template>
 <script>
 import ClubsSidebar from '@/components/ClubsSidebar.vue'
-import MainNavbar from '@/components/MainNavbar.vue'
 import ProfileObject from '@/components/ProfileObject.vue'
 
-export default ({ components: { ClubsSidebar, MainNavbar, ProfileObject } })
+export default ({ components: { ClubsSidebar, ProfileObject } })
 </script>

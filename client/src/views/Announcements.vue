@@ -1,7 +1,6 @@
 <template>
     <body>
         <div>
-            <main-navbar/>
             <clubs-sidebar/>
         </div>
         <br>
@@ -38,13 +37,12 @@
 </template>
 <script>
 import { Api } from '@/Api'
-import MainNavbar from '@/components/MainNavbar.vue'
 import ClubsSidebar from '@/components/ClubsSidebar.vue'
 import AnnouncementsObject from '@/components/AnnouncementsObject.vue'
 
 export default ({
   name: 'announcements',
-  components: { ClubsSidebar, 'announcements-object': AnnouncementsObject, MainNavbar },
+  components: { ClubsSidebar, 'announcements-object': AnnouncementsObject },
   mounted() {
     console.log('page is loaded!')
     Api.get('/announcements')

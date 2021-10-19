@@ -1,7 +1,6 @@
 <template>
     <body>
         <div>
-            <main-navbar/>
             <clubs-sidebar/>
             <br>
             <b-container>
@@ -25,12 +24,11 @@
 <script>
 import { Api } from '@/Api'
 
-import MainNavbar from '@/components/MainNavbar.vue'
 import ClubsSidebar from '@/components/ClubsSidebar.vue'
 
 export default ({
   name: 'announcements',
-  components: { ClubsSidebar, MainNavbar },
+  components: { ClubsSidebar },
   data() {
     return {
       newAnnouncement: {

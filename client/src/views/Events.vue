@@ -1,7 +1,6 @@
 <template>
     <body>
         <div>
-            <main-navbar/>
             <clubs-sidebar/>
             <br><br><br>
             <b-container>
@@ -25,13 +24,12 @@
 </template>
 <script>
 import ClubsSidebar from '@/components/ClubsSidebar.vue'
-import MainNavbar from '@/components/MainNavbar.vue'
 import EventsObject from '@/components/EventsObject.vue'
 import { Api } from '@/Api'
 
 export default ({
   name: 'events',
-  components: { ClubsSidebar, MainNavbar, EventsObject },
+  components: { ClubsSidebar, EventsObject },
   mounted() {
     console.log('PAGE is loaded!')
     Api.get('/events')
