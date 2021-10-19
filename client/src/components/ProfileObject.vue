@@ -71,22 +71,23 @@ export default {
     }
   },
   mounted() {
-    if (localStorage.universityId) {
-      this.universityId = localStorage.universityId
-      this.updatedUser.name = localStorage.name
+    if (localStorage.getItem('universityId')) {
+      this.universityId = localStorage.getItem('universityId')
+      this.updatedUser.name = localStorage.getItem('name')
     }
   },
   methods: {
     Save() {
       if (this.universityId !== '') {
         Api.patch(`/users/${this.universityId}`, this.updatedUser)
-        localStorage.name = this.updatedUser.name
+        localStorage.setItem('name', this.updatedUser.name)
         alert('User: "' + this.universityId + '" was successfully updated!')
           .catch(error => {
             this.message = error
           })
       } else {
         alert('Please log-in to edit user information')
+        this.$router.push({ name: 'signIn' })
       }
     }
   }

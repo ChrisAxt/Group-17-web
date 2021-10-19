@@ -53,7 +53,7 @@ export default ({
       Api.get(`/users/${localStorage.universityId}/clubs`)
         .then(response => {
           console.log(response.data)
-          this.clubs = response.data
+          this.clubs = response.data.clubs
         })
         .catch(error => {
           this.clubs = []

@@ -188,10 +188,10 @@ router.post('/api/users/:uni_id/clubs', function(req, res, next) {
     });
 });
 
-router.get('/api/users/:user_id/clubs', function(req, res, next){
+router.get('/api/users/:uni_id/clubs', function(req, res, next){
 
     Club
-    .find({ownerId: req.params.user_id})
+    .find({ownerId: req.params.uni_id})
     .exec(function (err, clubs){
         if (err) { 
             res.status(500).json({"message": "get failed"});
