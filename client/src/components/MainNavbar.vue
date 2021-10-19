@@ -12,8 +12,8 @@
 
         <b-form-input  size="sm" class="searchInput" placeholder="Search"></b-form-input> &nbsp;&nbsp;&nbsp;
         <b-button size="sm" name="searchBtn" class="searchBtn" type="submit">Search</b-button>
-            <b-button v-if="this.isUser" variant="danger" class="signOutBtn"  v-on:click="SignOut" >Sign Out</b-button>
-            <b-button v-else variant="success" class="signInBtn"  v-on:click="SignIn" >Sign In</b-button>
+            <b-button variant="danger" class="signOutBtn"  v-on:click="SignOut" >Sign Out</b-button>
+
   </b-navbar>
         </div>
 
@@ -22,26 +22,9 @@
 <script>
 export default {
   name: 'home',
-  data() {
-    return {
-      isUser: null
-    }
-  },
-  mounted() {
-    if (localStorage.getItem('universityId') === '') {
-      this.isUser = false
-    } else {
-      this.isUser = true
-    }
-    console.log(this.isUser)
-  },
   methods: {
     SignOut() {
-      localStorage.universityId = ''
-      localStorage.name = ''
-      this.$router.push({ name: 'signIn' })
-    },
-    SignIn() {
+      localStorage.clear()
       this.$router.push({ name: 'signIn' })
     }
   }
@@ -91,11 +74,6 @@ Nav {
     width: 50%;
 }
 .signOutBtn {
-  color: rgb(255, 255, 255);
-  width: 20%;
-  margin-left: 2%;
-}
-.signInBtn {
   color: rgb(255, 255, 255);
   width: 20%;
   margin-left: 2%;
