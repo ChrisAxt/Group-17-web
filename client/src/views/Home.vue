@@ -1,40 +1,42 @@
 <template>
-  <div>
-    <b-jumbotron header="DIT341 Frontend" lead="Welcome to your DIT341 Frontend Vue.js App">
-      <b-button class="btn_message" variant="primary" v-on:click="getMessage()" >Get Message from Server</b-button>
-      <p>Message from the server:<br/>
-      {{ message }}</p>
-    </b-jumbotron>
-  </div>
+    <body>
+        <div>
+            <main-navbar/>
+            <clubs-sidebar/>
+            <br>
+            <b-container>
+                <b-col></b-col>
+                <b-col id="homePage">
+                    <br><br>
+                    <h1>Welcome to SEMbook!</h1>
+                    <br>
+                    <img class="logo" :src="require('../assets/logoo.png')">
+                    <br><br>
+                    <h4 text-align="right">Created by Team 17</h4>
+                </b-col>
+            <br><br><br>
+            </b-container>
+        </div>
+
+    </body>
 </template>
-
 <script>
-// @ is an alias to /src
-import { Api } from '@/Api'
+import ClubsSidebar from '@/components/ClubsSidebar.vue'
+import MainNavbar from '@/components/MainNavbar.vue'
 
-export default {
-  name: 'home',
-  data() {
-    return {
-      message: 'none'
-    }
-  },
-  methods: {
-    getMessage() {
-      Api.get('/')
-        .then(response => {
-          this.message = response.data.message
-        })
-        .catch(error => {
-          this.message = error
-        })
-    }
-  }
-}
+export default ({ components: { ClubsSidebar, MainNavbar } })
 </script>
-
 <style>
-.btn_message {
-  margin-bottom: 1em;
+#homePage {
+    float: center;
+    text-align: center;
+}
+input{
+    background-color: lightgray;
+}
+.logo {
+    background: url('/assets/logo.png');
+    width: 30%;
+    height: auto;
 }
 </style>

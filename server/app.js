@@ -5,9 +5,29 @@ var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
 
+var usersController = require('./controllers/users');
+var announcementsController = require('./controllers/announcements');
+var eventsController = require('./controllers/events');
+var clubsController = require('./controllers/clubs');
+
+// Connect for deploy
+
+const { MongoClient } = require('mongodb');
+const mongoURI = "mongodb+srv://gianmarco_iachella:sembookdbpw@clusterbuster.vxc97.mongodb.net/sembookdb?retryWrites=true";
+//These below are not necessary due to them being run at "Connect to MongoDB" below
+/*const mongoClient = new MongoClient(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
+ mongoClient.connect(err => {
+  const collection = mongoClient.db("test").collection("devices");
+  // perform actions on the collection object
+  mongoClient.close();
+}); */
+
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
-var port = process.env.PORT || 3000;
+//This below is not necessary due to it being set at "Connect for deploy" above
+//var mongoURI = process.env.MONGODB_URI  || 'mongodb://localhost:27017/SEMbookDB';
+var port = process.env.PORT || 3001;
+
+
 
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err) {
@@ -35,10 +55,19 @@ app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT341 backend ExpressJS project!'});
 });
 
+app.use(usersController);
+
+app.use(announcementsController);
+
+app.use(eventsController);
+
+app.use(clubsController);
+
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
     res.status(404).json({ 'message': 'Not Found' });
 });
+
 
 // Configuration for serving frontend in production mode
 // Support Vuejs HTML 5 history mode

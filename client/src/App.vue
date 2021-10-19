@@ -1,12 +1,30 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-    </div>
+  <div id="app" background-color='blue'>
+    <!-- <div id="nav">
+      <router-link to="/">Sign In</router-link> |
+      <router-link to="/SignUp">Sign Up</router-link> |
+      <router-link to="/Home">Home</router-link> |
+      <router-link to="/">App Start</router-link> |
+      <router-link to="/Clubs">Clubs</router-link> |
+      <router-link to="/Events">Events</router-link> |
+      <router-link to="/Announcements">Announcements</router-link> |
+      <router-link to="/Profile">Profile</router-link>
+    </div> -->
     <!-- Render the content of the current page view -->
-    <router-view/>
+    <router-view />
+    <my-footer />
   </div>
 </template>
+<script>
+import MyFooter from '@/components/MyFooter.vue'
+
+export default {
+  components: {
+    MyFooter
+  }
+
+}
+</script>
 
 <style>
 #app {
@@ -14,6 +32,14 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  background-color: #ffffff;
+}
+@media only screen and (max-width: 768px) {
+  [class*="col-"] {
+    width: 100%;
+  }
+  #info {
+    display: none;
+  }
 }
 </style>
