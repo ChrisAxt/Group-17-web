@@ -13,7 +13,7 @@ var clubsController = require('./controllers/clubs');
 // Connect for deploy
 
 const { MongoClient } = require('mongodb');
-const mongoURI = "mongodb+srv://gianmarco_iachella:sembookdbpw@clusterbuster.vxc97.mongodb.net/sembookdb?retryWrites=true&w=majority";
+const mongoURI = "mongodb+srv://gianmarco_iachella:sembookdbpw@clusterbuster.vxc97.mongodb.net/sembookdb?retryWrites=true";
 const mongoClient = new MongoClient(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 /* mongoClient.connect(err => {
   const collection = mongoClient.db("test").collection("devices");
