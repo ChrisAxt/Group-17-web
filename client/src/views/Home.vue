@@ -4,11 +4,11 @@
             <main-navbar/>
             <clubs-sidebar/>
             <br>
-            <b-container id="textLogo">
+            <b-container>
                 <b-col></b-col>
-                <b-col>
+                <b-col id="homePage">
                     <br><br>
-                    <h1 text-align="center">Welcome to SEMbook!</h1>
+                    <h1>Welcome to SEMbook!</h1>
                     <br>
                     <img :src="require('../assets/logoo.png')">
                     <br><br>
@@ -27,12 +27,10 @@ import MainNavbar from '@/components/MainNavbar.vue'
 export default ({ components: { ClubsSidebar, MainNavbar } })
 </script>
 <style>
-h1 {text-align: center;}
-h3 {text-align: center;}
-p {text-align: center;}
-div {text-align: center;}
-form{text-align: center;}
-
+#homePage {
+    float: center;
+    text-align: center;
+}
 input{
     background-color: lightgray;
 }
