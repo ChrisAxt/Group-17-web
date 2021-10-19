@@ -1,12 +1,20 @@
 <template>
-<b-list-group>
-  <b-list-group-item v-bind:href="'/Announcement/'+ this._id">
-    <div class="d-flex w-100 justify-content-between">
-      <h4 class="mb-1">{{ title }}</h4>
-    </div>
-    <small>{{ body }}</small>
-  </b-list-group-item>
-</b-list-group>
+
+  <b-card
+    class="d-flex w-100 justify-content-between">
+    <b-form-input
+      v-model="updatedAnnouncement.title"
+      :placeholder="title"
+      >{{ title }}
+    </b-form-input>
+    <b-form-input
+      v-model="updatedAnnouncement.body"
+      :placeholder="body"
+      >{{ body }}
+    </b-form-input>
+    <b-button v-on:click="Save" variant="edit">Save</b-button>
+  </b-card>
+
 </template>
 
 <script>
@@ -35,13 +43,26 @@ export default {
   },
   methods: {
     Save() {
-      // this.title = this.$route.params.currentAnnouncement.title
-      Api.put(`/announcements/${this.announcementId}`, this.updatedAnnouncement)
-      alert('Announcement: "' + this.title + '" was successfully updated!')
+      Api.put(`/announcements/${this._id}`, this.updatedAnnouncement)
+        .then(response => {
+          this.updatedAnnouncement = response.data
+          if (this.updatedAnnouncement != null) {
+            alert('Announcement: "' + this.title + '" was successfully updated!')
+          }
+        })
         .catch(error => {
           this.message = error
         })
-    }
+    }/* ,
+    getAnnouncement() {
+      Api.get(`/announcements/${this._id}`)
+        .then(response => {
+          this.announcement = response.data
+        })
+      if (this.announcement !== null) {
+        this.$router.push({ name: 'announcement', params: { currentAnnouncement: this.announcement.title } })
+      }
+    } */
   }
 }
 </script>
