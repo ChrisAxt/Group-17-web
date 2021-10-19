@@ -5,9 +5,9 @@
           <h4 id="sidebar-no-header-title">Create something</h4>
           <nav class="mb-3">
             <b-nav vertical>
-              <b-nav-item href="http://localhost:8080/CreateClub" @click="hide">Create Club</b-nav-item>
-              <b-nav-item href="http://localhost:8080/CreateEvent" @click="hide">Create Event</b-nav-item>
-              <b-nav-item href="http://localhost:8080/CreateAnnouncement" @click="hide">Create Announcement</b-nav-item>
+              <router-link to="/CreateClub"><b-navbar-brand @click="hide">Create Club</b-navbar-brand></router-link>
+              <router-link to="/CreateEvent"><b-navbar-brand @click="hide">Create Event</b-navbar-brand></router-link>
+              <router-link to="/CreateAnnouncement"><b-navbar-brand @click="hide">Create Announcement</b-navbar-brand></router-link>
             </b-nav>
           </nav>
           <b-button variant="primary" block @click="hide">Close Sidebar</b-button>
