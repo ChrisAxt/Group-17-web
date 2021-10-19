@@ -11,6 +11,8 @@
     </p>
 
     <small>{{ location }}</small>
+    <p v-if="isPublic">Public</p>
+    <p v-else>Private</p>
     <b-button class="delBtn" variant="danger" v-on:click="$emit('del-event', event._id)">X</b-button>
   </b-list-group-item>
 </b-list-group>
@@ -23,13 +25,16 @@ export default {
     name: {
       type: String
     },
+    description: {
+      type: String
+    },
+    isPublic: {
+      type: Boolean
+    },
     location: {
       type: String
     },
     date: {
-      type: String
-    },
-    description: {
       type: String
     }
   }

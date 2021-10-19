@@ -15,8 +15,9 @@
                     <b-form-input placeholder="Address" list="input-list" id="input-with-list" v-model="newEvent.location"></b-form-input>
                     <br>
                     <b-form-datepicker id="example-datepicker" v-model="newEvent.date" class="mb-2"></b-form-datepicker>
-                    <event-checkbox :value="value" v-model="newEvent.isPublic"/>
-                        <b-form-textarea id="textarea-auto-height" placeholder="Description" rows="3" max-rows="8" v-model="newEvent.description"></b-form-textarea>
+                    <b-form-select placeholder="Is this event private?" :options="options" v-model="newEvent.isPublic"/>
+                    <br><br>
+                    <b-form-textarea id="textarea-auto-height" placeholder="Description" rows="3" max-rows="8" v-model="newEvent.description"></b-form-textarea>
                     <br><br>
                     <b-button class="CreateEvent" v-on:click="createEvent">Create</b-button>
                 </b-col>
@@ -39,9 +40,10 @@ export default ({
     return {
       newEvent: {
         name: '',
+        description: '',
+        isPublic: '',
         location: '',
-        date: '',
-        description: ''
+        date: ''
       },
       selected: null,
       options: [
@@ -60,6 +62,7 @@ export default ({
           this.newEvent.location = null
           this.newEvent.date = null
           this.newEvent.description = null
+          this.newEvent.isPublic = null
           this.$router.push({ name: 'events', params: { currentEvent: this.newEvent } })
         })
     }
