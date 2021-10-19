@@ -7,10 +7,11 @@
                 <b-col></b-col>
                 <b-col>
                     <br><br>
-                    <h1 text-align="center">Today</h1>
+                    <h1 text-align="center">Welcome to SEMbook!</h1>
                     <br>
-                    <events-object/>
+                    <img :src="require('../assets/logoo.png')">
                     <br><br>
+                    <h4 text-align="right">Created by Team 17</h4>
                 </b-col>
             <br>
             </b-container>
@@ -20,7 +21,6 @@
 </template>
 <script>
 import ClubsSidebar from '@/components/ClubsSidebar.vue'
-import EventsObject from '@/components/EventsObject.vue'
 
-export default ({ components: { ClubsSidebar, EventsObject } })
+export default ({ components: { ClubsSidebar } })
 </script>
