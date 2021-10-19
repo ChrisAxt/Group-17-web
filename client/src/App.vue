@@ -1,6 +1,6 @@
 <template>
   <div id="app" background-color='blue'>
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">App Start</router-link> |
       <router-link to="/SignIn">Sign In</router-link> |
       <router-link to="/SignUp">Sign Up</router-link> |
@@ -9,7 +9,7 @@
       <router-link to="/Events">Events</router-link> |
       <router-link to="/Announcements">Announcements</router-link> |
       <router-link to="/Profile">Profile</router-link>
-    </div>
+    </div> -->
     <!-- Render the content of the current page view -->
     <router-view />
     <my-footer />
@@ -33,5 +33,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   background-color: #ffffff;
+}
+@media only screen and (max-width: 768px) {
+  [class*="col-"] {
+    width: 100%;
+  }
+  #info {
+    display: none;
+  }
 }
 </style>
